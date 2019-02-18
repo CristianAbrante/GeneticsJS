@@ -1,5 +1,5 @@
 {
-  "name": "GeneticsJS",
+  "name": "genetics.js",
   "version": "1.0.0",
   "description": "Genetic algoritms library",
   "main": "lib/index.js",
