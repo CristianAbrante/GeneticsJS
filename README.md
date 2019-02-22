@@ -1,5 +1,4 @@
 <h1 align="center">
-  <br>
   <img src="docs/images/logo.png" alt="genetics.js logo" width="400">
 </h1>
 
