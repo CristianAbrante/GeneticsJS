@@ -1,8 +1,8 @@
 {
   "name": "genetics.js",
-  "version": "1.0.0",
-  "description": "Genetic algoritms library",
-  "main": "lib/index.js",
+  "version": "0.1.0",
+  "description": "Genetic algorithms library",
+  "main": "assets/lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
@@ -13,7 +13,8 @@
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "docs": "typedoc --out docs/ --mode modules --tsconfig tdconfig.json"
   },
   "repository": {
     "type": "git",
@@ -38,9 +39,10 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.14.2",
     "typescript": "^3.3.3"
   },
   "files": [
-    "lib/**/*"
+    "assets/lib/**/*"
   ]
 }
