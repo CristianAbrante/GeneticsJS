@@ -45,6 +45,6 @@
     "typescript": "^3.3.3"
   },
   "files": [
-    "assets/lib/**/*"
+    "lib/**/*"
   ]
 }
