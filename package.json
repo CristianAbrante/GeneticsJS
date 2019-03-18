@@ -1,7 +1,7 @@
 {
-  "name": "genetics.js",
-  "version": "0.1.0",
-  "description": "Genetic algorithms library",
+  "name": "genetics-js",
+  "version": "0.0.0",
+  "description": "Genetic and evolutionary algorithms framework for the web",
   "main": "assets/lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -21,13 +21,15 @@
     "url": "git+https://github.com/CristianAbrante/GeneticsJS.git"
   },
   "keywords": [
-    "genetics algoritms",
+    "genetic algoritms",
     "evolutionary algorithms",
+    "evolutionary computing",
     "algorithms",
-    "optimization"
+    "optimization",
+    "metaheuristic"
   ],
   "author": "Cristian Abrante",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CristianAbrante/GeneticsJS/issues"
   },
