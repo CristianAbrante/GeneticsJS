@@ -4,7 +4,7 @@
 
 ### TypeScript ###
 # Compiled files folder
-lib/
+/lib/
 docs/
 
 ### Linux ###
