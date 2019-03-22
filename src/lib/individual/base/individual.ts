@@ -45,8 +45,10 @@ abstract class Individual<T> implements Iterable<T> {
    * array for initializing the genotype.
    * @param genotype genotype array.
    */
-  protected constructor(genotype: T[]) {
-    this.setGenotype(genotype);
+  protected constructor(genotype?: T[]) {
+    if (genotype !== null) {
+      this.setGenotype(genotype as T[]);
+    }
   }
 
   /**
