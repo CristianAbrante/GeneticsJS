@@ -13,13 +13,18 @@ abstract class NumericReader<I extends NumericIndividual<T>, T extends NumericTy
 
   public abstract readonly tokenDefinition: Array<IndividualToken<T>>;
 
-  public convertToken(token: string): T{
+  public convertToken(token: string): T {
+    let convertedToken: T | null = null;
     this.tokenDefinition.forEach(tokenDefinition => {
       if (tokenDefinition.token.test(token)) {
-        return tokenDefinition.value(token);
+        convertedToken = tokenDefinition.value(token);
       }
     });
-    throw new Error(`Definition error: unexpected token ${token}`);
+    if (convertedToken !== null) {
+      return convertedToken;
+    } else {
+      throw new Error(`Definition error: unexpected token ${token}`);
+    }
   }
 
   public getGenotype(tokens: string[]): T[] {
