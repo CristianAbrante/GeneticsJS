@@ -4,13 +4,14 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from './individual';
+import Individual from './Individual';
 
-export interface IndividualGeneratorParams<T> {
-  size: number,
-  range?: T[]
+export interface IndividualGeneratorParams {
+  size: number
 }
 
-export interface IndividualGenerator<T> {
-  generate(param: IndividualGeneratorParams<T>): Individual<T>;
+export interface IndividualGenerator<I extends Individual<T>, T> {
+  generate(param: IndividualGeneratorParams): I;
 }
+
+export default IndividualGenerator;
