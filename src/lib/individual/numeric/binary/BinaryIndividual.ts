@@ -4,16 +4,11 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from '../../base/individual';
-import BinaryGenerator from './BinaryGenerator';
+import Numeric from './../base/';
 
-class BinaryIndividual extends Individual<boolean> {
+class BinaryIndividual extends Numeric.Individual<boolean> {
   constructor(representation?: string|boolean[]) {
-    if (typeof representation === 'string') {
-
-    } else {
-      super(representation as boolean[]);
-    }
+    super(representation as boolean[], {firstElement: true, lastElement: false});
   }
 }
 
