@@ -68,6 +68,10 @@ abstract class Individual<T> implements Iterable<T> {
     return this.genotype[Symbol.iterator]();
   }
 
+  public copy(other: Individual<T>) {
+    this.setGenotype(other.genotype);
+  }
+
   /**
    * Returns the gene at specified index.
    * @param geneIndex index of the gene to be accessed.
