@@ -8,6 +8,6 @@ import BinaryIndividual from './BinaryIndividual';
 import BinaryReader from './BinaryReader';
 
 export default {
-  individual: BinaryIndividual,
-  reader: BinaryReader
+  Individual: BinaryIndividual,
+  Reader: BinaryReader
 }

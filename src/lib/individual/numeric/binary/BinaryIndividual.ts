@@ -5,10 +5,20 @@
  */
 
 import Numeric from './../base/';
+import BinaryReader from './BinaryReader';
+
+const reader = new BinaryReader();
 
 class BinaryIndividual extends Numeric.Individual<boolean> {
-  constructor(representation?: string|boolean[]) {
-    super(representation as boolean[], {firstElement: true, lastElement: false});
+  constructor(representation: string|boolean[]) {
+    const range = {firstElement: true, lastElement: false};
+
+    if (typeof representation === 'string') {
+      super([], range);
+      this.copy(reader.read(representation));
+    } else {
+      super(representation as boolean[], range);
+    }
   }
 }
 

@@ -11,11 +11,11 @@ import BinaryIndividual from './BinaryIndividual';
 class BinaryReader extends Numeric.Reader<BinaryIndividual, boolean> {
   public readonly tokenDefinition: Array<IndividualToken<boolean>> = [
     {
-      token: /0f/i,
+      token: /[0f]/i,
       value: () => false
     },
     {
-      token: /1t/i,
+      token: /[1t]/i,
       value: () => true
     }
   ];
