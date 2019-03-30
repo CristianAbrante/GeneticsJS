@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { Individual, Mutable } from './index';
+import { BaseIndividual, Mutable } from './index';
 
-abstract class MutableIndividual<T> extends Individual<T> implements Mutable<MutableIndividual<T>, T> {
+abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable<MutableIndividual<T>, T> {
   public copyWithin(target: number, start: number = 0, end: number = this.length()): MutableIndividual<T> {
     this.setGenotype(this.genotype.copyWithin(target, start, end));
     return this;

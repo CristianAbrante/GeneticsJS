@@ -4,6 +4,6 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-export { default as Individual } from './Individual';
+export { default as BaseIndividual } from './BaseIndividual';
 export { default as Mutable } from './Mutable';
 export { default as MutableIndividual } from './MutableIndividual';

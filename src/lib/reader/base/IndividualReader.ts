@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from '../../individual/base/Individual';
+import BaseIndividual from '../../individual/base/BaseIndividual';
 
 export interface IndividualToken<T> {
   token: RegExp;
   value: (token: string) => T;
 }
 
-export default interface IndividualReader<I extends Individual<T>, T> {
+export default interface IndividualReader<I extends BaseIndividual<T>, T> {
   readonly tokenDefinition: Array<IndividualToken<T>>;
 
   tokenize(definition: string): string[];

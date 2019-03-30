@@ -17,7 +17,7 @@ type geneConditionCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) =>
 type geneEvaluationCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) => any;
 
 /**
- * ## Individual
+ * ## BaseIndividual
  * Base class for creating individuals which
  * are one of the fundamental blocks of evolutionary
  * algorithms.
@@ -33,7 +33,7 @@ type geneEvaluationCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) =
  *
  * @typeparam T is the type of the individual.
  */
-abstract class Individual<T> implements Iterable<T> {
+abstract class BaseIndividual<T> implements Iterable<T> {
   /**
    * Genotype array.
    */
@@ -67,7 +67,7 @@ abstract class Individual<T> implements Iterable<T> {
     return this.genotype[Symbol.iterator]();
   }
 
-  public copy(other: Individual<T>) {
+  public copy(other: BaseIndividual<T>) {
     this.setGenotype(other.genotype);
   }
 
@@ -242,4 +242,4 @@ abstract class Individual<T> implements Iterable<T> {
   }
 }
 
-export default Individual;
+export default BaseIndividual;

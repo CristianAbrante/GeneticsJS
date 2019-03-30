@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { Individual } from './index';
+import { BaseIndividual } from './index';
 
-interface Mutable<I extends Individual<T>, T> {
+interface Mutable<I extends BaseIndividual<T>, T> {
   copyWithin(target: number, start: number, end: number): I;
   set(geneIndex: number, gene: T): void;
   fill(gene: T, start: number, end: number): I;
