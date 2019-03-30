@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from './Individual';
+import { Individual } from './index';
 
 interface Mutable<I extends Individual<T>, T> {
   copyWithin(target: number, start: number, end: number): I;

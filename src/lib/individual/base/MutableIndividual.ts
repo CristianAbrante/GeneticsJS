@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from './Individual';
-import Mutable from './Mutable';
+import { Individual, Mutable } from './index';
 
 abstract class MutableIndividual<T> extends Individual<T> implements Mutable<MutableIndividual<T>, T> {
   public copyWithin(target: number, start: number = 0, end: number = this.length()): MutableIndividual<T> {

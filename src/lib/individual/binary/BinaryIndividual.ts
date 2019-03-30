@@ -5,7 +5,7 @@
  */
 
 import BinaryReader from '../../reader/binary/BinaryReader';
-import MutableIndividual from '../base/MutableIndividual';
+import { MutableIndividual } from '../base/';
 
 const reader = new BinaryReader();
 
