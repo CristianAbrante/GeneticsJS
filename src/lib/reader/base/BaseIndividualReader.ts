@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import BaseIndividual from '../../individual/base/BaseIndividual';
+import { BaseIndividual } from '../../individual/base/';
 import IndividualReader, { IndividualToken } from './IndividualReader';
 
 abstract class BaseIndividualReader<I extends BaseIndividual<T>, T> implements IndividualReader<I, T> {
