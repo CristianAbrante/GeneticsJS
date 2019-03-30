@@ -4,4 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-export type NumericType = number | boolean;
+import Individual from './Individual';
+import MutableIndividual from './MutableIndividual';
+
+export { Individual, MutableIndividual };

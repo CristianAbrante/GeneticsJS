@@ -5,7 +5,7 @@
  */
 
 import BinaryIndividual from './BinaryIndividual';
-import BinaryReader from './BinaryReader';
+import BinaryReader from '../../../reader/numeric/binary/BinaryReader';
 
 export default {
   Individual: BinaryIndividual,

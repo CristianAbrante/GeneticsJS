@@ -5,7 +5,7 @@
  */
 
 import Numeric from './../base/';
-import BinaryReader from './BinaryReader';
+import BinaryReader from '../../../reader/numeric/binary/BinaryReader';
 
 const reader = new BinaryReader();
 

@@ -58,3 +58,5 @@ abstract class MutableIndividual<T> extends Individual<T> implements Mutable<Mut
     this.genotype[geneIndex] = gene;
   }
 }
+
+export default MutableIndividual;
