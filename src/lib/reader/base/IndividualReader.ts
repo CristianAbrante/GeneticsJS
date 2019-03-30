@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from './Individual';
+import Individual from '../../individual/base/Individual';
 
 export interface IndividualToken<T> {
   token: RegExp;

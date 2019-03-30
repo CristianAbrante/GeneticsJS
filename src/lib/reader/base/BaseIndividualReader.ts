@@ -4,11 +4,10 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import IndividualReader, { IndividualToken } from './../../base/IndividualReader';
-import NumericIndividual from './NumericIndividual';
-import { NumericType } from './NumericType';
+import Individual from '../../individual/base/Individual';
+import IndividualReader, { IndividualToken } from './IndividualReader';
 
-abstract class NumericReader<I extends NumericIndividual<T>, T extends NumericType> implements IndividualReader<I, T> {
+abstract class BaseIndividualReader<I extends Individual<T>, T> implements IndividualReader<I, T> {
   public abstract readonly tokenDefinition: Array<IndividualToken<T>>;
 
   public convertToken(token: string): T {
@@ -38,4 +37,4 @@ abstract class NumericReader<I extends NumericIndividual<T>, T extends NumericTy
   public abstract tokenize(definition: string): string[];
 }
 
-export default NumericReader;
+export default BaseIndividualReader;

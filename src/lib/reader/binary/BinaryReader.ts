@@ -4,11 +4,11 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { IndividualToken } from '../../base/IndividualReader';
-import Numeric from '../../../individual/numeric/base';
-import BinaryIndividual from '../../../individual/binary/BinaryIndividual';
+import BinaryIndividual from '../../individual/binary/BinaryIndividual';
+import BaseIndividualReader from '../base/BaseIndividualReader';
+import { IndividualToken } from '../base/IndividualReader';
 
-class BinaryReader extends Numeric.Reader<BinaryIndividual, boolean> {
+class BinaryReader extends BaseIndividualReader<BinaryIndividual, boolean> {
   public readonly tokenDefinition: Array<IndividualToken<boolean>> = [
     {
       token: /[0f]/i,
