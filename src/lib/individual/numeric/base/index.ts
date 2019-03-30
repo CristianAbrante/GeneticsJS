@@ -5,9 +5,5 @@
  */
 
 import NumericIndividual from './NumericIndividual';
-import NumericReader from './NumericReader';
 
-export default {
-  Individual: NumericIndividual,
-  Reader: NumericReader,
-};
+export { NumericIndividual };
