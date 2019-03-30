@@ -4,20 +4,18 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Numeric from './../base/';
-import BinaryReader from '../../../reader/numeric/binary/BinaryReader';
+import BinaryReader from '../../reader/binary/BinaryReader';
+import MutableIndividual from '../base/MutableIndividual';
 
 const reader = new BinaryReader();
 
-class BinaryIndividual extends Numeric.Individual<boolean> {
+class BinaryIndividual extends MutableIndividual<boolean> {
   constructor(representation: string | boolean[]) {
-    const range = { firstElement: true, lastElement: false };
-
     if (typeof representation === 'string') {
-      super([], range);
+      super([]);
       this.copy(reader.read(representation));
     } else {
-      super(representation as boolean[], range);
+      super(representation as boolean[]);
     }
   }
 }

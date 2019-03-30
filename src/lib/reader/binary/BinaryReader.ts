@@ -5,8 +5,8 @@
  */
 
 import { IndividualToken } from '../../base/IndividualReader';
-import Numeric from '../base/';
-import BinaryIndividual from './BinaryIndividual';
+import Numeric from '../../../individual/numeric/base';
+import BinaryIndividual from '../../../individual/binary/BinaryIndividual';
 
 class BinaryReader extends Numeric.Reader<BinaryIndividual, boolean> {
   public readonly tokenDefinition: Array<IndividualToken<boolean>> = [
