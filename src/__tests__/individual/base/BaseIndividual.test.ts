@@ -4,180 +4,170 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Genetics from '../../../index';
-console.log(Genetics);
-const { BinaryIndividual } = Genetics.individuals;
+import BaseIndividualTest from '../../test-individuals/BaseIndividualTest';
 
-const b = new BinaryIndividual('1110');
-console.log(b);
+describe('BaseIndividual tests', () => {
+  BaseIndividualTest.forEach(individualTest => {
+    const initialization = individualTest.initialization.value;
+    const expectedGenotype = individualTest.initialization.genotype;
+    const indType = individualTest.initialization.type;
+    let individual = new indType(initialization);
 
-const testIndividuals = [
-  {
-    fill: [
-      {
-        end: 6,
-        start: 0,
-        value: false,
-      },
-      {
-        end: 4,
-        start: 0,
-        value: false,
-      },
-    ],
-    find: [
-      {
-        callback: (element: boolean) => {
-          return element;
-        },
-        expected: true,
-        index: 1,
-      },
-    ],
-    genotype: [false, true, false, false, true, false, false, false],
-    initialization: '01001000',
-    set: [
-      {
-        newValue: false,
-        position: 4,
-      },
-      {
-        newValue: true,
-        position: 0,
-      },
-      {
-        newValue: false,
-        position: 0,
-      },
-      {
-        newValue: true,
-        position: 7,
-      },
-    ],
-    type: Binary.BaseIndividual,
-  },
-];
+    describe(`Individual ${individual.toString()} tests`, () => {
+      beforeEach(() => {
+        individual = new indType(initialization);
+      });
 
-testIndividuals.forEach(individual => {
-  const individualName = individual.initialization;
-  const expectedGenotype = individual.genotype;
-  let ind = new individual.type(individualName);
+      test('creation test', () => {
+        expect(individual.genotype).toEqual(expectedGenotype);
+      });
 
-  const initializeIndividual = () => {
-    ind = new individual.type(individualName);
-  };
+      test('length test', () => {
+        expect(individual.length()).toBe(individualTest.length.expected);
+      });
 
-  beforeEach(() => {
-    initializeIndividual();
-  });
+      test('toString test', () => {
+        if (individualTest.toString !== undefined) {
+          expect(individual.toString()).toEqual(individualTest.toString.expected);
+        } else if (typeof initialization === 'string') {
+          expect(individual.toString()).toEqual(initialization);
+        }
+      });
 
-  test(`Creation test`, () => {
-    expect(ind.genotype).toEqual(individual.genotype);
-  });
+      describe('get test', () => {
+        test('naive get test', () => {
+          expectedGenotype.forEach((expectedGene, geneIndex) => {
+            expect(individual.get(geneIndex)).toBe(expectedGene);
+          });
+        });
 
-  test(`Iteration test`, () => {
-    let index = 0;
-    for (const gene of ind) {
-      expect(gene).toBe(expectedGenotype[index++]);
-    }
-  });
+        test('get test', () => {
+          if (individualTest.get !== undefined) {
+            individualTest.get.forEach(test => {
+              expect(individual.get(test.params)).toEqual(test.expected);
+            });
+          }
+        });
 
-  test(`get test`, () => {
-    expectedGenotype.forEach((expectedGene, geneIndex) => {
-      expect(ind.get(geneIndex)).toBe(expectedGene);
+        test('get throws positive', () => {
+          expect(() => individual.get(10000)).toThrow(RangeError);
+        });
+
+        test('get throws negative', () => {
+          expect(() => individual.get(-10)).toThrow(RangeError);
+        });
+      });
+
+      describe('inclusion methods', () => {
+        const methods = {
+          includes: (gene: any, index: number) => individual.includes(gene, index),
+          indexOf: (gene: any, index: number) => individual.indexOf(gene, index),
+          lastIndexOf: (gene: any, index: number) => individual.lastIndexOf(gene, index),
+        };
+
+        Object.keys(methods).forEach(methodName => {
+          test(`${methodName} test`, () => {
+            // @ts-ignore
+            const method = methods[methodName];
+            // @ts-ignore
+            const methodTest = individualTest[methodName];
+            if (methodTest !== undefined) {
+              methodTest.forEach((test: any) => {
+                const gene = test.params[0];
+                const startIndex = test.params[1];
+                expect(method(gene, startIndex)).toEqual(test.expected);
+              });
+            }
+          });
+        });
+      });
+
+      describe('iteration methods', () => {
+        test(`Iteration test`, () => {
+          let index = 0;
+          for (const gene of individual) {
+            expect(gene).toBe(expectedGenotype[index++]);
+          }
+        });
+
+        const methods = {
+          entries: {
+            checkNext: (next: any, expectGene: any, geneIndex: number) => {
+              expect(next.value[0]).toEqual(geneIndex);
+              expect(next.value[1]).toEqual(expectGene);
+            },
+            getIterator: () => individual.entries(),
+          },
+          keys: {
+            checkNext: (next: any, expectGene: any, geneIndex: number) => {
+              expect(next.value).toEqual(geneIndex);
+            },
+            getIterator: () => individual.keys(),
+          },
+          values: {
+            checkNext: (next: any, expectGene: any, geneIndex: number) => {
+              expect(next.value).toEqual(expectGene);
+            },
+            getIterator: () => individual.values(),
+          },
+        };
+
+        Object.keys(methods).forEach(method => {
+          test(`${method} test`, () => {
+            // @ts-ignore
+            const currentMethod = methods[method];
+            const iterator = currentMethod.getIterator();
+            expectedGenotype.forEach((expectedGene, geneIndex) => {
+              const next = iterator.next();
+              currentMethod.checkNext(next, expectedGene, geneIndex);
+              expect(next.done).toBeFalsy();
+            });
+            const nextOut = iterator.next();
+            expect(nextOut.value).toBeUndefined();
+            expect(nextOut.done).toBeTruthy();
+          });
+        });
+      });
+
+      describe('callback each methods', () => {
+        test('naive every test', () => {
+          let i = 0;
+          expect(
+            individual.every(gene => {
+              return gene === expectedGenotype[i++];
+            }),
+          ).toBeTruthy();
+        });
+
+        test('naive forEach test', () => {
+          let i = 0;
+          const result = individual.forEach(gene => {
+            expect(gene).toEqual(expectedGenotype[i++]);
+          });
+          expect(result).toBeUndefined();
+        });
+
+        const methods = {
+          every: (params: any) => individual.every(params),
+          find: (params: any) => individual.find(params),
+          findIndex: (params: any) => individual.findIndex(params),
+          some: (params: any) => individual.some(params),
+        };
+
+        Object.keys(methods).forEach(methodName => {
+          test(`${methodName} test`, () => {
+            // @ts-ignore
+            const method = methods[methodName];
+            // @ts-ignore
+            const methodTest = individualTest[methodName];
+            if (methodTest !== undefined) {
+              methodTest.forEach((test: any) => {
+                expect(method(test.params)).toEqual(test.expected);
+              });
+            }
+          });
+        });
+      });
     });
-  });
-
-  test(`get throws positive`, () => {
-    expect(() => ind.get(10000)).toThrow(RangeError);
-  });
-
-  test(`get throws negative`, () => {
-    expect(() => ind.get(-10)).toThrow(RangeError);
-  });
-
-  test('set test', () => {
-    const setTests = individual.set;
-    setTests.forEach(test => {
-      ind.set(test.position, test.newValue);
-      expect(ind.get(test.position)).toBe(test.newValue);
-    });
-  });
-
-  test(`set throws positive`, () => {
-    expect(() => ind.get(10000)).toThrow(RangeError);
-  });
-
-  test(`set throws negative`, () => {
-    expect(() => ind.get(-10)).toThrow(RangeError);
-  });
-
-  test('length test', () => {
-    expect(ind.length()).toBe(expectedGenotype.length);
-  });
-
-  test('entries test', () => {
-    const iterator = ind.entries();
-    expectedGenotype.forEach((expectedGene, geneIndex) => {
-      const next = iterator.next();
-      expect(next.value[0]).toBe(geneIndex);
-      expect(next.value[1]).toBe(expectedGene);
-      expect(next.done).toBeFalsy();
-    });
-    const nextOut = iterator.next();
-    expect(nextOut.value).toBeUndefined();
-    expect(nextOut.done).toBeTruthy();
-  });
-
-  test('every test', () => {
-    let i = 0;
-    expect(
-      ind.every(gene => {
-        return gene === expectedGenotype[i++];
-      }),
-    );
-  });
-
-  test('fill test', () => {
-    const fillTests = individual.fill;
-    fillTests.forEach(fillTest => {
-      initializeIndividual();
-      const { end, start, value } = fillTest;
-      const dummy = [...expectedGenotype];
-      const expected = dummy.fill(value, start, end);
-      expect(ind.fill(value, start, end)).toEqual(expected);
-    });
-  });
-
-  test('find test', () => {
-    const findTests = individual.find;
-    findTests.forEach((findTest: any) => {
-      const { callback, expected } = findTest;
-      expect(ind.find(callback)).toEqual(expected);
-    });
-  });
-
-  test('find index test', () => {
-    const findTests = individual.find;
-    findTests.forEach((findTest: any) => {
-      const { callback, index } = findTest;
-      expect(ind.findIndex(callback)).toEqual(index);
-    });
-  });
-
-  test('find index test', () => {
-    const findTests = individual.find;
-    findTests.forEach((findTest: any) => {
-      const { callback, index } = findTest;
-      expect(ind.findIndex(callback)).toEqual(index);
-    });
-  });
-
-  test('for each test', () => {
-    let i = 0;
-    const result = ind.forEach(gene => {
-      expect(gene).toEqual(expectedGenotype[i++]);
-    });
-    expect(result).toBeUndefined();
   });
 });
