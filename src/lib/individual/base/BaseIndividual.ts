@@ -200,7 +200,11 @@ abstract class BaseIndividual<T> implements Iterable<T> {
    * @return string that represents individual.
    */
   public toString(): string {
-    return this.genotype.toString();
+    let representation = '';
+    this.forEach((gene, index) => {
+      representation += this.geneToString(gene) + (index !== this.length() - 1 ? ' ' : '');
+    });
+    return representation;
   }
 
   /**
@@ -240,6 +244,8 @@ abstract class BaseIndividual<T> implements Iterable<T> {
   protected isInRange(index: number): boolean {
     return index >= 0 && index < this.length();
   }
+
+  protected abstract geneToString(gene: T): string;
 }
 
 export default BaseIndividual;

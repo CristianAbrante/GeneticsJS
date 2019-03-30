@@ -31,6 +31,10 @@ abstract class NumericIndividual extends MutableIndividual<number> {
       throw new Error('range is not valid, first element must be lower than last');
     }
   }
+
+  protected geneToString(gene: number): string {
+    return gene.toString();
+  }
 }
 
 export default NumericIndividual;

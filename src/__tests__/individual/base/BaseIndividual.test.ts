@@ -4,7 +4,12 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Binary from './../../../lib/individual/numeric/binary';
+import Genetics from '../../../index';
+console.log(Genetics);
+const { BinaryIndividual } = Genetics.individuals;
+
+const b = new BinaryIndividual('1110');
+console.log(b);
 
 const testIndividuals = [
   {
@@ -49,7 +54,7 @@ const testIndividuals = [
         position: 7,
       },
     ],
-    type: Binary.Individual,
+    type: Binary.BaseIndividual,
   },
 ];
 

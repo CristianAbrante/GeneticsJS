@@ -18,6 +18,10 @@ class BinaryIndividual extends MutableIndividual<boolean> {
       super(representation as boolean[]);
     }
   }
+
+  protected geneToString(gene: boolean): string {
+    return gene ? '1' : '0';
+  }
 }
 
 export default BinaryIndividual;
