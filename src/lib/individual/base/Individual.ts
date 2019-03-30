@@ -34,7 +34,6 @@ type geneEvaluationCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) =
  * @typeparam T is the type of the individual.
  */
 abstract class Individual<T> implements Iterable<T> {
-
   /**
    * Genotype array.
    */
@@ -110,7 +109,7 @@ abstract class Individual<T> implements Iterable<T> {
    * @return iterable iterator object.
    */
   public entries(): IterableIterator<[number, T]> {
-    return this.genotype.entries()
+    return this.genotype.entries();
   }
 
   /**
@@ -143,7 +142,7 @@ abstract class Individual<T> implements Iterable<T> {
    * @return first gene which accept the callback condition
    *         or `undefined` if none accepts it.
    */
-  public find(callback: geneConditionCallback<T>): T|undefined {
+  public find(callback: geneConditionCallback<T>): T | undefined {
     return this.genotype.find(callback);
   }
 
@@ -154,7 +153,7 @@ abstract class Individual<T> implements Iterable<T> {
    * @return index of the first gene which accept the
    *         callback condition or `undefined` if none accepts it.
    */
-  public findIndex(callback: geneConditionCallback<T>): number|undefined {
+  public findIndex(callback: geneConditionCallback<T>): number | undefined {
     return this.genotype.findIndex(callback);
   }
 

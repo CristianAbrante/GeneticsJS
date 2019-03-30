@@ -9,5 +9,5 @@ import BinaryReader from './BinaryReader';
 
 export default {
   Individual: BinaryIndividual,
-  Reader: BinaryReader
-}
+  Reader: BinaryReader,
+};

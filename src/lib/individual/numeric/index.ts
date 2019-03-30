@@ -8,5 +8,5 @@ import Numeric from './base';
 
 export default {
   Individual: Numeric.Individual,
-  Reader: Numeric.Reader
-}
+  Reader: Numeric.Reader,
+};
