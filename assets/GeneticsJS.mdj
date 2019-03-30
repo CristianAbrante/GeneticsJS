@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Individual",
+					"name": "BaseIndividual",
 					"visible": true,
 					"defaultDiagram": true,
 					"ownedViews": [
@@ -1075,7 +1075,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+generate(parameters): Individual",
+											"text": "+generate(parameters): BaseIndividual",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4189,7 +4189,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+read(definition: String, return: Individual)",
+											"text": "+read(definition: String, return: BaseIndividual)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -12289,7 +12289,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Individual",
+											"text": "BaseIndividual",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13797,7 +13797,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFpc5ZVkyJC6xA="
 									},
-									"name": "Individual",
+									"name": "BaseIndividual",
 									"stereotype": "",
 									"visibility": "public",
 									"templateParameters": [
@@ -16530,7 +16530,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "#mutate(individual: Individual, params: Object)",
+											"text": "#mutate(individual: BaseIndividual, params: Object)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21667,7 +21667,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mutate(individual: Individual)",
+											"text": "+mutate(individual: BaseIndividual)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21986,7 +21986,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mutate(individual: Individual)",
+											"text": "+mutate(individual: BaseIndividual)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22305,7 +22305,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mutate(individual: Individual)",
+											"text": "+mutate(individual: BaseIndividual)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22624,7 +22624,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mutate(individual: Individual)",
+											"text": "+mutate(individual: BaseIndividual)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23094,7 +23094,7 @@
 											"visibility": "public",
 											"isStatic": false,
 											"isLeaf": false,
-											"type": "Individual[]",
+											"type": "BaseIndividual[]",
 											"isReadOnly": false,
 											"isOrdered": false,
 											"isUnique": false,
@@ -24843,7 +24843,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+combine(parents: Individual[], params: Object)",
+											"text": "+combine(parents: BaseIndividual[], params: Object)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
