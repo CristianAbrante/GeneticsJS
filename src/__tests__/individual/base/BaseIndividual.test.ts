@@ -23,14 +23,14 @@ describe('BaseIndividual tests', () => {
       });
 
       test('length test', () => {
-        expect(individual.length()).toBe(individualTest.length.expected);
+        if (individualTest.length !== undefined) {
+          expect(individual.length()).toBe(individualTest.length.expected);
+        }
       });
 
       test('toString test', () => {
-        if (individualTest.toString !== undefined) {
-          expect(individual.toString()).toEqual(individualTest.toString.expected);
-        } else if (typeof initialization === 'string') {
-          expect(individual.toString()).toEqual(initialization);
+        if (individualTest.toStringTest !== undefined) {
+          expect(individual.toString()).toEqual(individualTest.toStringTest.expected);
         }
       });
 

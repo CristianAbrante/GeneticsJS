@@ -9,6 +9,62 @@ import Genetics from '../../index';
 const { BinaryIndividual } = Genetics.individuals;
 
 export default [
+  // "
+  {
+    initialization: {
+      genotype: [],
+      type: BinaryIndividual,
+      value: '',
+    },
+  },
+  // 0
+  {
+    initialization: {
+      genotype: [false],
+      type: BinaryIndividual,
+      value: 'f',
+    },
+  },
+  // 1
+  {
+    initialization: {
+      genotype: [true],
+      type: BinaryIndividual,
+      value: 't',
+    },
+  },
+  // 0
+  {
+    initialization: {
+      genotype: [false],
+      type: BinaryIndividual,
+      value: '  F  ',
+    },
+  },
+  // 1
+  {
+    initialization: {
+      genotype: [true],
+      type: BinaryIndividual,
+      value: '  T  ',
+    },
+  },
+  // 0 1 0 1 1 1 1 0
+  {
+    initialization: {
+      genotype: [false, true, false, true, true, true, true, false],
+      type: BinaryIndividual,
+      value: '0 1 f ttt\t\nt\rF',
+    },
+  },
+  // 0 1 0 1
+  {
+    initialization: {
+      genotype: [false, true, false, true],
+      type: BinaryIndividual,
+      value: [false, true, false, true],
+    },
+  },
   // 0 1 0 0 1 0 0 0
   {
     copy: [
@@ -182,7 +238,7 @@ export default [
         params: (gene: boolean) => typeof gene === 'string',
       },
     ],
-    toString: {
+    toStringTest: {
       expected: '0 1 0 0 1 0 0 0',
     },
   },
