@@ -9,12 +9,21 @@ import Genetics from '../../index';
 const { BinaryIndividual } = Genetics.individuals;
 
 export default [
+  // 0 1 0 0 1 0 0 0
   {
     copy: [
       {
         change: [{ pos: 1, value: true }, { pos: 3, value: true }],
         expected: [false, false, true, false],
         params: new BinaryIndividual('0010'),
+      },
+    ],
+    copyWithin: [
+      {
+        end: 4,
+        expected: [false, true, false, false, false, true, false, false],
+        start: 0,
+        target: 4,
       },
     ],
     deepCopy: [
@@ -28,6 +37,12 @@ export default [
       {
         expected: false,
         params: (gene: boolean) => gene,
+      },
+    ],
+    fill: [
+      {
+        expected: [true, true, true, true, true, false, false, false],
+        params: [true, 0, 4],
       },
     ],
     find: [
@@ -138,6 +153,21 @@ export default [
     length: {
       expected: 8,
     },
+    map: [
+      {
+        expected: [true, false, true, true, false, true, true, true],
+        params: (gene: boolean) => !gene,
+      },
+    ],
+    reverse: {
+      expected: [false, false, false, true, false, false, true, false],
+    },
+    set: [
+      {
+        expected: [true, true, false, false, false, false, false, true],
+        params: [[0, true], [2, false], [4, false], [7, true]],
+      },
+    ],
     some: [
       {
         expected: true,
