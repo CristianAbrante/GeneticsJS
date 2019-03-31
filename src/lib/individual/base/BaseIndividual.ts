@@ -44,10 +44,8 @@ abstract class BaseIndividual<T> implements Iterable<T> {
    * array for initializing the genotype.
    * @param genotype genotype array.
    */
-  protected constructor(genotype?: T[]) {
-    if (genotype !== null) {
-      this.setGenotype(genotype as T[]);
-    }
+  constructor(genotype: T[]) {
+    this.setGenotype(genotype);
   }
 
   /**
@@ -65,10 +63,6 @@ abstract class BaseIndividual<T> implements Iterable<T> {
    */
   public [Symbol.iterator](): Iterator<T> {
     return this.genotype[Symbol.iterator]();
-  }
-
-  public copy(other: BaseIndividual<T>) {
-    this.setGenotype(other.genotype);
   }
 
   /**

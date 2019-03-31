@@ -7,6 +7,8 @@
 import { BaseIndividual } from './index';
 
 interface Mutable<I extends BaseIndividual<T>, T> {
+  copy(other: I): void;
+  deepCopy(other: I): void;
   copyWithin(target: number, start: number, end: number): I;
   set(geneIndex: number, gene: T): void;
   fill(gene: T, start: number, end: number): I;

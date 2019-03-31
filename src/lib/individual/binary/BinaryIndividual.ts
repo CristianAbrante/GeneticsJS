@@ -19,6 +19,10 @@ class BinaryIndividual extends MutableIndividual<boolean> {
     }
   }
 
+  public deepCopy(other: MutableIndividual<boolean>): void {
+    this.setGenotype(Array.from(other.genotype));
+  }
+
   protected geneToString(gene: boolean): string {
     return gene ? '1' : '0';
   }

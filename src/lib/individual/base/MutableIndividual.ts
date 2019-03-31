@@ -7,6 +7,12 @@
 import { BaseIndividual, Mutable } from './index';
 
 abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable<MutableIndividual<T>, T> {
+  public copy(other: MutableIndividual<T>): void {
+    this.setGenotype(other.genotype);
+  }
+
+  public abstract deepCopy(other: MutableIndividual<T>): void;
+
   public copyWithin(target: number, start: number = 0, end: number = this.length()): MutableIndividual<T> {
     this.setGenotype(this.genotype.copyWithin(target, start, end));
     return this;
