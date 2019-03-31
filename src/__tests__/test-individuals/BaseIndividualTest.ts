@@ -10,6 +10,20 @@ const { BinaryIndividual } = Genetics.individuals;
 
 export default [
   {
+    copy: [
+      {
+        change: [{ pos: 1, value: true }, { pos: 3, value: true }],
+        expected: [false, false, true, false],
+        params: new BinaryIndividual('0010'),
+      },
+    ],
+    deepCopy: [
+      {
+        change: [{ pos: 1, value: true }, { pos: 3, value: true }],
+        expected: [false, false, true, false],
+        params: new BinaryIndividual('0010'),
+      },
+    ],
     every: [
       {
         expected: false,
