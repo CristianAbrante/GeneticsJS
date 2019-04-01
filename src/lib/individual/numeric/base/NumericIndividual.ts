@@ -11,10 +11,10 @@ export interface NumericRange<T> {
   lastElement: T;
 }
 
-abstract class NumericIndividual<T extends number|boolean> extends Individual<T> {
+abstract class NumericIndividual<T extends number | boolean> extends Individual<T> {
   protected constructor(genotype: T[], private _range: NumericRange<T>) {
     super(genotype);
-  };
+  }
 
   public valueIsInRange(value: T): boolean {
     if (typeof value === 'boolean') {

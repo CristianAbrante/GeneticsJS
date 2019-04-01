@@ -8,9 +8,7 @@ import IndividualReader, { IndividualToken } from './../../base/IndividualReader
 import NumericIndividual from './NumericIndividual';
 import { NumericType } from './NumericType';
 
-abstract class NumericReader<I extends NumericIndividual<T>, T extends NumericType>
-  implements IndividualReader<I, T>{
-
+abstract class NumericReader<I extends NumericIndividual<T>, T extends NumericType> implements IndividualReader<I, T> {
   public abstract readonly tokenDefinition: Array<IndividualToken<T>>;
 
   public convertToken(token: string): T {

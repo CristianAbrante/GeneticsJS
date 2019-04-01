@@ -9,5 +9,5 @@ import NumericReader from './NumericReader';
 
 export default {
   Individual: NumericIndividual,
-  Reader: NumericReader
-}
+  Reader: NumericReader,
+};

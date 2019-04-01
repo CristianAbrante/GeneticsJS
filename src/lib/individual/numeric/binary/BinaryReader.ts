@@ -12,12 +12,12 @@ class BinaryReader extends Numeric.Reader<BinaryIndividual, boolean> {
   public readonly tokenDefinition: Array<IndividualToken<boolean>> = [
     {
       token: /[0f]/i,
-      value: () => false
+      value: () => false,
     },
     {
       token: /[1t]/i,
-      value: () => true
-    }
+      value: () => true,
+    },
   ];
 
   public read(definition: string): BinaryIndividual {

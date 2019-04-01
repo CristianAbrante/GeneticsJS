@@ -12,12 +12,12 @@ const testIndividuals = [
       {
         end: 6,
         start: 0,
-        value: false
+        value: false,
       },
       {
         end: 4,
         start: 0,
-        value: false
+        value: false,
       },
     ],
     find: [
@@ -26,34 +26,34 @@ const testIndividuals = [
           return element;
         },
         expected: true,
-        index: 1
-      }
+        index: 1,
+      },
     ],
     genotype: [false, true, false, false, true, false, false, false],
-    initialization: "01001000",
+    initialization: '01001000',
     set: [
       {
         newValue: false,
-        position: 4
+        position: 4,
       },
       {
         newValue: true,
-        position: 0
+        position: 0,
       },
       {
         newValue: false,
-        position: 0
+        position: 0,
       },
       {
         newValue: true,
-        position: 7
-      }
+        position: 7,
+      },
     ],
-    type: Binary.Individual
-  }
+    type: Binary.Individual,
+  },
 ];
 
-testIndividuals.forEach((individual) => {
+testIndividuals.forEach(individual => {
   const individualName = individual.initialization;
   const expectedGenotype = individual.genotype;
   let ind = new individual.type(individualName);
@@ -80,7 +80,7 @@ testIndividuals.forEach((individual) => {
   test(`get test`, () => {
     expectedGenotype.forEach((expectedGene, geneIndex) => {
       expect(ind.get(geneIndex)).toBe(expectedGene);
-    })
+    });
   });
 
   test(`get throws positive`, () => {
@@ -96,7 +96,7 @@ testIndividuals.forEach((individual) => {
     setTests.forEach(test => {
       ind.set(test.position, test.newValue);
       expect(ind.get(test.position)).toBe(test.newValue);
-    })
+    });
   });
 
   test(`set throws positive`, () => {
@@ -126,16 +126,18 @@ testIndividuals.forEach((individual) => {
 
   test('every test', () => {
     let i = 0;
-    expect(ind.every(gene => {
-      return gene === expectedGenotype[i++];
-    }))
+    expect(
+      ind.every(gene => {
+        return gene === expectedGenotype[i++];
+      }),
+    );
   });
 
   test('fill test', () => {
     const fillTests = individual.fill;
     fillTests.forEach(fillTest => {
       initializeIndividual();
-      const {end, start, value} = fillTest;
+      const { end, start, value } = fillTest;
       const dummy = [...expectedGenotype];
       const expected = dummy.fill(value, start, end);
       expect(ind.fill(value, start, end)).toEqual(expected);
@@ -145,24 +147,24 @@ testIndividuals.forEach((individual) => {
   test('find test', () => {
     const findTests = individual.find;
     findTests.forEach((findTest: any) => {
-      const {callback, expected} = findTest;
-      expect(ind.find(callback)).toEqual(expected)
+      const { callback, expected } = findTest;
+      expect(ind.find(callback)).toEqual(expected);
     });
   });
 
   test('find index test', () => {
     const findTests = individual.find;
     findTests.forEach((findTest: any) => {
-      const {callback, index} = findTest;
-      expect(ind.findIndex(callback)).toEqual(index)
+      const { callback, index } = findTest;
+      expect(ind.findIndex(callback)).toEqual(index);
     });
   });
 
   test('find index test', () => {
     const findTests = individual.find;
     findTests.forEach((findTest: any) => {
-      const {callback, index} = findTest;
-      expect(ind.findIndex(callback)).toEqual(index)
+      const { callback, index } = findTest;
+      expect(ind.findIndex(callback)).toEqual(index);
     });
   });
 
