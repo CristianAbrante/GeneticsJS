@@ -13,9 +13,8 @@ abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable
 
   public abstract deepCopy(other: MutableIndividual<T>): void;
 
-  public copyWithin(target: number, start: number = 0, end: number = this.length()): MutableIndividual<T> {
+  public copyWithin(target: number, start: number = 0, end: number = this.length()) {
     this.setGenotype(this.genotype.copyWithin(target, start, end));
-    return this;
   }
 
   /*
@@ -25,9 +24,8 @@ abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable
    * @param end end index, by default is the length of the genotype.
    * @return the genotype.
    */
-  public fill(gene: T, start: number, end: number): MutableIndividual<T> {
+  public fill(gene: T, start: number, end: number) {
     this.setGenotype(this.genotype.fill(gene, start, end));
-    return this;
   }
 
   /**
@@ -37,18 +35,16 @@ abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable
    * @param callback which is going to be executed.
    * @return the new genotype.
    */
-  public map(callback: (gene: T, geneIndex?: number, genotype?: T[]) => T): MutableIndividual<T> {
+  public map(callback: (gene: T, geneIndex?: number, genotype?: T[]) => T) {
     this.setGenotype(this.genotype.map(callback));
-    return this;
   }
 
   /**
    * Reverses the genotype.
    * @return the new genotype.
    */
-  public reverse(): MutableIndividual<T> {
+  public reverse() {
     this.setGenotype(this.genotype.reverse());
-    return this;
   }
 
   /**

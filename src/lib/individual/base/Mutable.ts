@@ -9,11 +9,11 @@ import { BaseIndividual } from './index';
 interface Mutable<I extends BaseIndividual<T>, T> {
   copy(other: I): void;
   deepCopy(other: I): void;
-  copyWithin(target: number, start: number, end: number): I;
+  copyWithin(target: number, start: number, end: number): void;
   set(geneIndex: number, gene: T): void;
-  fill(gene: T, start: number, end: number): I;
-  map(callback: (gene: T, geneIndex?: number, genotype?: T[]) => T): I;
-  reverse(): I;
+  fill(gene: T, start: number, end: number): void;
+  map(callback: (gene: T, geneIndex?: number, genotype?: T[]) => T): void;
+  reverse(): void;
 }
 
 export default Mutable;
