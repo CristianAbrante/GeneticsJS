@@ -24,7 +24,7 @@ abstract class MutableIndividual<T> extends BaseIndividual<T> implements Mutable
    * @param end end index, by default is the length of the genotype.
    * @return the genotype.
    */
-  public fill(gene: T, start: number, end: number) {
+  public fill(gene: T, start: number = 0, end: number = this.length()) {
     this.setGenotype(this.genotype.fill(gene, start, end));
   }
 

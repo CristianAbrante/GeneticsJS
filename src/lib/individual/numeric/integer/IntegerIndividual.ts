@@ -36,18 +36,18 @@ class IntegerIndividual extends NumericIndividual {
 
   public copy(other: IntegerIndividual): void {
     this.setGenotype(other.genotype);
-    this.range = other.range;
+    this.setRange(other.range);
   }
 
   public deepCopy(other: IntegerIndividual): void {
     this.setGenotype(Array.from(other.genotype));
-    this.range = {
+    this.setRange({
       highest: other.range.highest,
       lowest: other.range.lowest,
-    };
+    });
   }
 
-  public fill(gene: number, start: number, end: number) {
+  public fill(gene: number, start: number = 0, end: number = this.length()) {
     super.fill(IntegerIndividual.normalize(gene), start, end);
   }
 
