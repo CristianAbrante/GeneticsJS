@@ -26,6 +26,6 @@ describe('integer individual test', () => {
     individual.set(1, 100000);
     expect(individual.get(1)).toEqual(100000);
     individual.set(1, -100000);
-    expect(individual.get(1)).toEqual(100000);
+    expect(individual.get(1)).toEqual(-100000);
   });
 });
