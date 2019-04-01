@@ -4,6 +4,6 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import NumericIndividual from './NumericIndividual';
+import NumericIndividual, { NumericRange } from './NumericIndividual';
 
-export { NumericIndividual };
+export { NumericIndividual, NumericRange };
