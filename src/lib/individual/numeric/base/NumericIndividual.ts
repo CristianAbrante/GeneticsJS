@@ -14,31 +14,24 @@ export interface NumericRange {
 abstract class NumericIndividual extends MutableIndividual<number> {
   constructor(genotype: number[], private _range: NumericRange) {
     super(genotype);
+    this.setRange(_range);
   }
 
   get range(): NumericRange {
     return this._range;
   }
 
-  set range(range: NumericRange) {
-    if (range.lowest < range.highest) {
-      this._range = range;
-    } else {
-      throw new Error('range is not valid, first element must be lower than last');
-    }
-  }
-
   public copy(other: NumericIndividual): void {
     super.copy(other);
-    this.range = other.range;
+    this.setRange(other.range);
   }
 
   public deepCopy(other: NumericIndividual): void {
     this.setGenotype(Array.from(other.genotype));
-    this.range = {
+    this.setRange({
       highest: other.range.highest,
       lowest: other.range.lowest,
-    };
+    });
   }
 
   public set(geneIndex: number, gene: number): void {
@@ -58,6 +51,14 @@ abstract class NumericIndividual extends MutableIndividual<number> {
       return result;
     };
     super.map(inRangeCallback);
+  }
+
+  protected setRange(range: NumericRange) {
+    if (range.lowest < range.highest) {
+      this._range = range;
+    } else {
+      throw new Error('range is not valid, first element must be lower than last');
+    }
   }
 
   protected checkGeneRange(gene: number) {
