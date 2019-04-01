@@ -62,3 +62,5 @@ class IntegerIndividual extends NumericIndividual {
     super.set(geneIndex, IntegerIndividual.normalize(gene));
   }
 }
+
+export default IntegerIndividual;
