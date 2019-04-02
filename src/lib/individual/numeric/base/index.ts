@@ -4,10 +4,6 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import NumericIndividual from './NumericIndividual';
-import NumericReader from './NumericReader';
+import NumericIndividual, { NumericRange } from './NumericIndividual';
 
-export default {
-  Individual: NumericIndividual,
-  Reader: NumericReader,
-};
+export { NumericIndividual, NumericRange };

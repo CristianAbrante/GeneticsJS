@@ -2,7 +2,7 @@
   "name": "genetics-js",
   "version": "0.0.0",
   "description": "Genetic and evolutionary algorithms framework for the web",
-  "main": "assets/lib/index.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json --coverage --coverageReporters=text-lcov | coveralls",

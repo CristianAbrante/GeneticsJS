@@ -4,10 +4,4 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import BinaryIndividual from './BinaryIndividual';
-import BinaryReader from './BinaryReader';
-
-export default {
-  Individual: BinaryIndividual,
-  Reader: BinaryReader,
-};
+export { default as IntegerIndividual } from './IntegerIndividual';

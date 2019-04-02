@@ -4,9 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Numeric from './base';
+import { NumericIndividual, NumericRange } from './base';
+import { IntegerIndividual } from './integer';
 
-export default {
-  Individual: Numeric.Individual,
-  Reader: Numeric.Reader,
-};
+export { NumericIndividual, NumericRange, IntegerIndividual };

@@ -17,7 +17,7 @@ type geneConditionCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) =>
 type geneEvaluationCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) => any;
 
 /**
- * ## Individual
+ * ## BaseIndividual
  * Base class for creating individuals which
  * are one of the fundamental blocks of evolutionary
  * algorithms.
@@ -33,7 +33,7 @@ type geneEvaluationCallback<T> = (gene: T, geneIndex?: number, genotype?: T[]) =
  *
  * @typeparam T is the type of the individual.
  */
-abstract class Individual<T> implements Iterable<T> {
+abstract class BaseIndividual<T> implements Iterable<T> {
   /**
    * Genotype array.
    */
@@ -44,10 +44,8 @@ abstract class Individual<T> implements Iterable<T> {
    * array for initializing the genotype.
    * @param genotype genotype array.
    */
-  protected constructor(genotype?: T[]) {
-    if (genotype !== null) {
-      this.setGenotype(genotype as T[]);
-    }
+  constructor(genotype: T[]) {
+    this.setGenotype(genotype);
   }
 
   /**
@@ -67,10 +65,6 @@ abstract class Individual<T> implements Iterable<T> {
     return this.genotype[Symbol.iterator]();
   }
 
-  public copy(other: Individual<T>) {
-    this.setGenotype(other.genotype);
-  }
-
   /**
    * Returns the gene at specified index.
    * @param geneIndex index of the gene to be accessed.
@@ -80,18 +74,6 @@ abstract class Individual<T> implements Iterable<T> {
   public get(geneIndex: number): T {
     this.checkIndexRange(geneIndex);
     return this.genotype[geneIndex];
-  }
-
-  /**
-   * Sets the gene at specified index to
-   * the specified value.
-   * @param geneIndex index of the gene to be set.
-   * @param gene new value of the gene.
-   * @throws RangeError if index is not in range [0-length)
-   */
-  public set(geneIndex: number, gene: T) {
-    this.checkIndexRange(geneIndex);
-    this.genotype[geneIndex] = gene;
   }
 
   /**
@@ -121,18 +103,6 @@ abstract class Individual<T> implements Iterable<T> {
    */
   public every(callback: geneConditionCallback<T>): boolean {
     return this.genotype.every(callback);
-  }
-
-  /**
-   * Fills the genotype with the specified gene.
-   * @param gene this value is going to fill the array.
-   * @param start start index, by default is `0`.
-   * @param end end index, by default is the length of the genotype.
-   * @return the genotype.
-   */
-  public fill(gene: T, start: number = 0, end: number = this.length()): T[] {
-    this.setGenotype(this.genotype.fill(gene, start, end));
-    return this.genotype;
   }
 
   /**
@@ -209,27 +179,6 @@ abstract class Individual<T> implements Iterable<T> {
   }
 
   /**
-   * Creates a new genotype with the result of
-   * the execution of the specified callback for each
-   * element.
-   * @param callback which is going to be executed.
-   * @return the new genotype.
-   */
-  public map(callback: geneEvaluationCallback<T>): T[] {
-    this.setGenotype(this.genotype.map(callback));
-    return this.genotype;
-  }
-
-  /**
-   * Reverses the genotype.
-   * @return the new genotype.
-   */
-  public reverse(): T[] {
-    this.setGenotype(this.genotype.reverse());
-    return this.genotype;
-  }
-
-  /**
    * Test if some gene validates the condition
    * specified by the callback.
    * @param callback that specifies condition.
@@ -245,7 +194,11 @@ abstract class Individual<T> implements Iterable<T> {
    * @return string that represents individual.
    */
   public toString(): string {
-    return this.genotype.toString();
+    let representation = '';
+    this.forEach((gene, index) => {
+      representation += this.geneToString(gene) + (index !== this.length() - 1 ? ' ' : '');
+    });
+    return representation;
   }
 
   /**
@@ -285,6 +238,8 @@ abstract class Individual<T> implements Iterable<T> {
   protected isInRange(index: number): boolean {
     return index >= 0 && index < this.length();
   }
+
+  protected abstract geneToString(gene: T): string;
 }
 
-export default Individual;
+export default BaseIndividual;

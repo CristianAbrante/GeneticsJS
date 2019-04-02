@@ -4,36 +4,75 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Individual from './../../base/Individual';
+import { MutableIndividual } from './../../base/';
 
-export interface NumericRange<T> {
-  firstElement: T;
-  lastElement: T;
+export interface NumericRange {
+  lowest: number;
+  highest: number;
 }
 
-abstract class NumericIndividual<T extends number | boolean> extends Individual<T> {
-  protected constructor(genotype: T[], private _range: NumericRange<T>) {
+abstract class NumericIndividual extends MutableIndividual<number> {
+  constructor(genotype: number[], private _range: NumericRange) {
     super(genotype);
+    this.setRange(_range);
   }
 
-  public valueIsInRange(value: T): boolean {
-    if (typeof value === 'boolean') {
-      return true;
-    } else {
-      return value >= this.range.firstElement && value <= this.range.lastElement;
-    }
-  }
-
-  get range(): NumericRange<T> {
+  get range(): NumericRange {
     return this._range;
   }
 
-  set range(range: NumericRange<T>) {
-    if (range.firstElement < range.lastElement) {
+  public copy(other: NumericIndividual): void {
+    super.copy(other);
+    this.setRange(other.range);
+  }
+
+  public deepCopy(other: NumericIndividual): void {
+    this.setGenotype(Array.from(other.genotype));
+    this.setRange({
+      highest: other.range.highest,
+      lowest: other.range.lowest,
+    });
+  }
+
+  public set(geneIndex: number, gene: number): void {
+    this.checkGeneRange(gene);
+    super.set(geneIndex, gene);
+  }
+
+  public fill(gene: number, start: number, end: number) {
+    this.checkGeneRange(gene);
+    super.fill(gene, start, end);
+  }
+
+  public map(callback: (gene: number, geneIndex?: number, genotype?: number[]) => number) {
+    const inRangeCallback = (gene: number, geneIndex?: number, genotype?: number[]) => {
+      const result = callback(gene, geneIndex, genotype);
+      this.checkGeneRange(result);
+      return result;
+    };
+    super.map(inRangeCallback);
+  }
+
+  protected setRange(range: NumericRange) {
+    if (range.lowest < range.highest) {
       this._range = range;
     } else {
       throw new Error('range is not valid, first element must be lower than last');
     }
+  }
+
+  protected checkGeneRange(gene: number) {
+    if (!this.geneIsInRange(gene)) {
+      throw new RangeError(`Range error: gene value ${gene} is not in range`);
+    }
+  }
+
+  protected geneIsInRange(gene: number): boolean {
+    return gene >= this.range.lowest && gene <= this.range.highest;
+  }
+
+  protected geneToString(gene: number): string {
+    return gene.toString();
   }
 }
 
