@@ -7,11 +7,6 @@
 import { NumericIndividual, NumericRange } from '../base';
 
 class IntegerIndividual extends NumericIndividual {
-  public static DEFAULT_RANGE: NumericRange = {
-    highest: Number.POSITIVE_INFINITY,
-    lowest: Number.NEGATIVE_INFINITY,
-  };
-
   private static normalize(gene: number): number {
     return Math.round(gene);
   }

@@ -12,9 +12,16 @@ export interface NumericRange {
 }
 
 abstract class NumericIndividual extends MutableIndividual<number> {
-  constructor(genotype: number[], private _range: NumericRange) {
+  public static DEFAULT_RANGE: NumericRange = {
+    highest: Number.POSITIVE_INFINITY,
+    lowest: Number.NEGATIVE_INFINITY,
+  };
+
+  private _range: NumericRange = NumericIndividual.DEFAULT_RANGE;
+
+  constructor(genotype: number[], range?: NumericRange) {
     super(genotype);
-    this.setRange(_range);
+    this.setRange(range);
   }
 
   get range(): NumericRange {
@@ -53,11 +60,15 @@ abstract class NumericIndividual extends MutableIndividual<number> {
     super.map(inRangeCallback);
   }
 
-  protected setRange(range: NumericRange) {
-    if (range.lowest < range.highest) {
-      this._range = range;
+  protected setRange(range?: NumericRange) {
+    if (range === undefined) {
+      this._range = NumericIndividual.DEFAULT_RANGE;
     } else {
-      throw new Error('range is not valid, first element must be lower than last');
+      if (range.lowest < range.highest) {
+        this._range = range;
+      } else {
+        throw new Error('range is not valid, first element must be lower than last');
+      }
     }
   }
 
