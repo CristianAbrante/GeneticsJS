@@ -239,6 +239,11 @@ abstract class BaseIndividual<T> implements Iterable<T> {
     return index >= 0 && index < this.length();
   }
 
+  /**
+   * Converts a gene to string, useful for method
+   * `toString`.
+   * @param gene that we are converting.
+   */
   protected abstract geneToString(gene: T): string;
 }
 
