@@ -5,6 +5,7 @@
  */
 
 import { NumericIndividual, NumericRange } from './base';
+import { FloatingIndividual } from './floating';
 import { IntegerIndividual } from './integer';
 
-export { NumericIndividual, NumericRange, IntegerIndividual };
+export { NumericIndividual, NumericRange, IntegerIndividual, FloatingIndividual };
