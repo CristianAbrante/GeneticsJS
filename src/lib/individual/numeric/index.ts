@@ -4,8 +4,14 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { NumericIndividual, NumericRange } from './base';
-import { FloatingIndividual } from './floating';
-import { IntegerIndividual } from './integer';
+import * as Base from './base';
+import * as Floating from './floating';
+import * as Integer from './integer';
 
-export { NumericIndividual, NumericRange, IntegerIndividual, FloatingIndividual };
+const numericIndividuals = {
+  ...Base,
+  ...Floating,
+  ...Integer,
+};
+
+export default numericIndividuals;

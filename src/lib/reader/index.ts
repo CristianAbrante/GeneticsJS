@@ -8,10 +8,10 @@ import * as Base from './base';
 import * as Binary from './binary';
 import * as Numeric from './numeric';
 
-const individuals = {
+const reader = {
   ...Base,
   ...Binary,
   ...Numeric.default,
 };
 
-export default individuals;
+export default reader;

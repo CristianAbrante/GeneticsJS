@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { FloatingIndividual } from '../../../individual/numeric';
+import { FloatingIndividual } from '../../../individual/numeric/floating/';
 import { IndividualToken } from '../../base/';
 import { NumericReader } from '../base/';
 

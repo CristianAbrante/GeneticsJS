@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { NumericIndividual } from '../../../individual/numeric';
+import { NumericIndividual } from '../../../individual/numeric/base/';
 import { BaseIndividualReader } from '../../base';
 
 abstract class NumericReader<I extends NumericIndividual> extends BaseIndividualReader<I, number> {

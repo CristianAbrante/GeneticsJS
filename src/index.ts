@@ -5,7 +5,9 @@
  */
 
 import * as individuals from './lib/individual';
+import * as reader from './lib/reader';
 
 export default {
   individuals: individuals.default,
+  reader: reader.default,
 };

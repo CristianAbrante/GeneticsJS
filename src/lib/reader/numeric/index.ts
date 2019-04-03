@@ -5,13 +5,13 @@
  */
 
 import * as Base from './base';
-import * as Binary from './binary';
-import * as Numeric from './numeric';
+import * as Floating from './floating';
+import * as Integer from './integer';
 
-const individuals = {
+const numericReaders = {
   ...Base,
-  ...Binary,
-  ...Numeric.default,
+  ...Floating,
+  ...Integer,
 };
 
-export default individuals;
+export default numericReaders;
