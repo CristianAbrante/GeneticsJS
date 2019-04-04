@@ -11,7 +11,7 @@ import { NumericReader } from '../base/';
 class IntegerReader extends NumericReader<IntegerIndividual> {
   public readonly tokenDefinition: Array<IndividualToken<number>> = [
     {
-      token: /[+-]?\d+(?:[Ee][+]?\d+)?/,
+      token: /^[+-]?\d+$/,
       value: (token: string) => Number.parseInt(token, 10),
     },
   ];
