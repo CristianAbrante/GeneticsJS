@@ -7,7 +7,7 @@
 import Genetics from '../..';
 const { BinaryIndividual } = Genetics.individuals;
 
-export const data = [
+const data = [
   {
     definition: '',
     expected: new BinaryIndividual([]),
@@ -70,4 +70,9 @@ export const data = [
   },
 ];
 
-export const error = ['other', '010011d', '  01 1o1', '\t\ts'];
+const error = ['other', '010011d', '  01 1o1', '\t\ts'];
+
+export default {
+  data,
+  error,
+};

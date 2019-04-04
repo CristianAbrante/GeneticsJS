@@ -11,11 +11,11 @@ import { NumericReader } from '../base/';
 class FloatingReader extends NumericReader<FloatingIndividual> {
   public readonly tokenDefinition: Array<IndividualToken<number>> = [
     {
-      token: /[+-]?\d+(?:(?:\.\d+)?(?:[Ee][+-]?\d+)?)?/,
+      token: /^[+-]?\d+(?:(?:\.\d+)?(?:[Ee][+-]?\d+)?)?$/,
       value: (token: string) => Number.parseFloat(token),
     },
     {
-      token: /[+-]?\.\d+(?:[Ee][+-]?\d+)?/,
+      token: /^[+-]?\.\d+(?:[Ee][+-]?\d+)?$/,
       value: (token: string) => Number.parseFloat(token),
     },
   ];

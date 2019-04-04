@@ -7,7 +7,7 @@
 import Genetics from '../..';
 const { FloatingIndividual } = Genetics.individuals;
 
-export const data = [
+const data = [
   {
     definition: '',
     expected: new FloatingIndividual([]),
@@ -34,4 +34,6 @@ export const data = [
   },
 ];
 
-export const error = [];
+const error = ['3.45.45', '--34.5', '-45e-3.28', 'letter', '.56e-.3'];
+
+export default { data, error };
