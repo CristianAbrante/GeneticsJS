@@ -8,6 +8,7 @@ import Genetics from '../../index';
 const { BinaryReader, FloatingReader, IntegerReader } = Genetics.reader;
 import BinaryData from '../test-data/BinaryReaderData';
 import FloatingData from '../test-data/FloatingReaderData';
+import IntegerData from '../test-data/IntegerReaderData';
 
 const tests = [
   {
@@ -21,6 +22,12 @@ const tests = [
     error: FloatingData.error,
     name: 'floating',
     reader: new FloatingReader(),
+  },
+  {
+    definitions: IntegerData.data,
+    error: IntegerData.error,
+    name: 'integer',
+    reader: new IntegerReader(),
   },
 ];
 
