@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jest --config jestconfig.json --coverage --coverageReporters=text-lcov | coveralls",
+    "test": "jest --config jestconfig.json",
+    "testcover": "jest --config jestconfig.json --coverage --coverageReporters=text-lcov | coveralls",
     "testfile": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",

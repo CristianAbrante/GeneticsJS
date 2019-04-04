@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import BaseIndividualTest from '../../test-individuals/BaseIndividualTest';
+import BaseIndividualTest from '../../test-data/BaseIndividualTest';
 
 describe('MutableIndividual methods tests', () => {
   BaseIndividualTest.forEach(individualTest => {

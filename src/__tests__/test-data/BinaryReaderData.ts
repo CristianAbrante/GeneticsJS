@@ -4,10 +4,14 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Genetics from '../../../index';
+import Genetics from '../..';
 const { BinaryIndividual } = Genetics.individuals;
 
-export default [
+export const data = [
+  {
+    definition: '',
+    expected: new BinaryIndividual([]),
+  },
   {
     definition: '0',
     expected: new BinaryIndividual([false]),
@@ -65,3 +69,5 @@ export default [
     expected: new BinaryIndividual([false, true, true, true, true, false, false, false]),
   },
 ];
+
+export const error = ['other', '010011d', '  01 1o1', '\t\ts'];

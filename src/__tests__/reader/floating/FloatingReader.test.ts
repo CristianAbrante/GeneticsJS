@@ -5,11 +5,11 @@
  */
 
 import Genetics from '../../../index';
-import { data, error } from '../../test-data/BinaryReaderData';
-const { BinaryReader } = Genetics.reader;
+import { data, error } from '../../test-data/FloatingReaderData';
+const { FloatingReader } = Genetics.reader;
 
-describe('Binary reader test', () => {
-  const reader = new BinaryReader();
+describe('Floating reader test', () => {
+  const reader = new FloatingReader();
 
   describe('Read test', () => {
     data.forEach(dataTest => {
@@ -23,10 +23,7 @@ describe('Binary reader test', () => {
   describe('Error test', () => {
     error.forEach(errorTest => {
       test(`Error in initialization ${errorTest}`, () => {
-        const call = () => {
-          reader.read(errorTest);
-        };
-        expect(call).toThrow(Error);
+        expect(() => reader.read(errorTest)).toThrow(Error);
       });
     });
   });

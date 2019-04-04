@@ -5,7 +5,7 @@
  */
 
 import { BinaryIndividual } from '../../../lib/individual/binary';
-import BaseIndividualTests from '../../test-individuals/BaseIndividualTest';
+import BaseIndividualTests from '../../test-data/BaseIndividualTest';
 
 describe('binary individual test', () => {
   BaseIndividualTests.forEach(individualTest => {
