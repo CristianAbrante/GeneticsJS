@@ -8,7 +8,7 @@ import Genetics from '../../../index';
 import DataTests from './BinaryReaderData';
 const { BinaryReader } = Genetics.reader;
 
-describe('binary reader test', () => {
+describe('Binary reader test', () => {
   const reader = new BinaryReader();
   DataTests.forEach(dataTest => {
     test(`Individual ${dataTest.expected.toString()} test`, () => {
