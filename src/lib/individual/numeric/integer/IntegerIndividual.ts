@@ -5,6 +5,7 @@
  */
 
 import { NumericIndividual, NumericRange } from '../base';
+import { IntegerReader } from './../../../reader/numeric/integer';
 
 /**
  * ## Integer individual
@@ -53,8 +54,14 @@ class IntegerIndividual extends NumericIndividual {
    * @param range of the individual, if not provided
    *        is the default range.
    */
-  constructor(representation: number[], range?: NumericRange) {
-    super(IntegerIndividual.normalizeGenotype(representation), IntegerIndividual.normalizeNumericRange(range));
+  constructor(representation: number[] | string, range?: NumericRange) {
+    if (typeof representation === 'string') {
+      super([], range);
+      const reader = new IntegerReader();
+      this.copy(reader.read(representation));
+    } else {
+      super(IntegerIndividual.normalizeGenotype(representation), IntegerIndividual.normalizeNumericRange(range));
+    }
   }
 
   /**
