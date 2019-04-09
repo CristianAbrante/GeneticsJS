@@ -48,5 +48,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "random-js": "^2.0.0"
+  }
 }
