@@ -7,11 +7,12 @@
   "scripts": {
     "test": "jest --config jestconfig.json --coverage --coverageReporters=text-lcov | coveralls",
     "testfiles": "jest --config jestconfig.json",
+    "test-ci": "jest --config jestconfig.json --coverage && cat ./coverage/lcov.info | coveralls",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm testfiles && npm run lint",
+    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
