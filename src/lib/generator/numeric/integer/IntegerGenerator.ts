@@ -11,7 +11,20 @@ import { NumericIndividual } from './../../../individual/numeric/base';
 import { IntegerIndividual } from './../../../individual/numeric/integer';
 import { NumericGenerator } from './../base';
 
+/**
+ * ## IntegerGenerator
+ * Generates an [[IntegerIndividual]].
+ */
 class IntegerGenerator extends NumericGenerator<IntegerIndividual> {
+  /**
+   * This method is used due to an issue with
+   * `random-js`. It does not accept `Number.Infinity` as
+   *  the lowest or highest number, instead it expects
+   *  `2 ** 53` as it maximum or `-2 ** 53` as its minimum.
+   *  So the range must be normalized.
+   * @param range that we want to normalize.
+   * @return normalized range.
+   */
   private static normalizeRange(range: NumericRange): NumericRange {
     const randomJSMax = 2 ** 53;
     const randomJSMin = -randomJSMax;
@@ -21,11 +34,24 @@ class IntegerGenerator extends NumericGenerator<IntegerIndividual> {
     };
   }
 
+  /**
+   * Generates a gene with the specified
+   * params.
+   * @param params of the generator.
+   * @return the generated gene.
+   */
   public generateGene(params: NumericParams): number {
     const normalizedRange = IntegerGenerator.normalizeRange(params.range);
     return integer(normalizedRange.lowest, normalizedRange.highest)(params.engine);
   }
 
+  /**
+   * Constructs the individual given
+   * the genotype and the range.
+   * @param genotype of the individual.
+   * @param range of the individual.
+   * @return [[NumericIndividual]] constructed with the given params.
+   */
   public construct(genotype: number[], range: NumericRange): IntegerIndividual {
     return new IntegerIndividual(genotype, range);
   }
