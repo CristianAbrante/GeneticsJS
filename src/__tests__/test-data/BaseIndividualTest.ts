@@ -6,7 +6,7 @@
 
 import Genetics from '../../index';
 
-const { BinaryIndividual } = Genetics.individuals;
+const { BinaryIndividual } = Genetics.individual;
 
 export default [
   // "

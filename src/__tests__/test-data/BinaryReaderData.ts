@@ -5,7 +5,7 @@
  */
 
 import Genetics from '../..';
-const { BinaryIndividual } = Genetics.individuals;
+const { BinaryIndividual } = Genetics.individual;
 
 const data = [
   {

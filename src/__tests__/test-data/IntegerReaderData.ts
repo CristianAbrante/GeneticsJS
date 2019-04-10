@@ -5,7 +5,7 @@
  */
 
 import Genetics from './../../index';
-const { IntegerIndividual } = Genetics.individuals;
+const { IntegerIndividual } = Genetics.individual;
 
 const data = [
   {

@@ -133,7 +133,7 @@ describe('BaseIndividual tests', () => {
         test('naive every test', () => {
           let i = 0;
           expect(
-            individual.every(gene => {
+            individual.every((gene: any) => {
               return gene === expectedGenotype[i++];
             }),
           ).toBeTruthy();
@@ -141,7 +141,7 @@ describe('BaseIndividual tests', () => {
 
         test('naive forEach test', () => {
           let i = 0;
-          const result = individual.forEach(gene => {
+          const result = individual.forEach((gene: any) => {
             expect(gene).toEqual(expectedGenotype[i++]);
           });
           expect(result).toBeUndefined();
