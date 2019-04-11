@@ -6,6 +6,18 @@
 
 import { BinaryIndividual } from '../../../lib/individual/binary';
 import BaseIndividualTests from '../../test-data/BaseIndividualTest';
+import BaseIndividualMock from '../../test-data/individual/BaseIndividualMock';
+import BaseIndividualMocks from '../../test-data/individual/binary';
+import baseIndividualTests from '../../test-data/suites/BaseIndividual';
+
+const creation = (initializationParams: BaseIndividualMock<BinaryIndividual, boolean>['initialization']) => {
+  return new BinaryIndividual(initializationParams.definition);
+};
+
+Object.keys(BaseIndividualMocks).forEach(key => {
+  const test = BaseIndividualMocks[key];
+  baseIndividualTests<BinaryIndividual, boolean>(test, creation);
+});
 
 describe('binary individual test', () => {
   BaseIndividualTests.forEach(individualTest => {
