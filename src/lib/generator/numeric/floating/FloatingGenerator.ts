@@ -29,11 +29,11 @@ class FloatingGenerator extends NumericGenerator<FloatingIndividual> {
    * Construct the [[FloatingIndividual]] with
    * the specified genotype and range.
    * @param genotype of the generated individual.
-   * @param range of the specified individual.
+   * @param params of the generator.
    * @return Constructed [[FloatingIndividual]] from genotype.
    */
-  public construct(genotype: number[], range: NumericRange): FloatingIndividual {
-    return new FloatingIndividual(genotype, range);
+  public construct(genotype: number[], params: NumericParams): FloatingIndividual {
+    return new FloatingIndividual(genotype, params.range);
   }
 }
 

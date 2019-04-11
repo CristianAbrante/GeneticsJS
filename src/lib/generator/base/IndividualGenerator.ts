@@ -22,9 +22,9 @@ interface IndividualGenerator<I extends BaseIndividual<T>, Params extends Genera
    * Construct the individual given a genotype
    * of the specified type and optional params.
    * @param genotype of the generated individual.
-   * @param args optional params for constructor.
+   * @param params of the generator
    */
-  construct(genotype: T[], ...args: any[]): I;
+  construct(genotype: T[], params: Params): I;
 
   /**
    * Generates the genotype given the params

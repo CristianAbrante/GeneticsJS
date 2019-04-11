@@ -54,10 +54,10 @@ abstract class BaseIndividualGenerator<I extends BaseIndividual<T>, Params exten
    */
   public generateWith(params: Params): I {
     BaseIndividualGenerator.checkLength(params.length);
-    return this.construct(this.generateGenotype(params));
+    return this.construct(this.generateGenotype(params), params);
   }
 
-  public abstract construct(genotype: T[], ...args: any[]): I;
+  public abstract construct(genotype: T[], params: Params): I;
 
   public abstract generate(...args: any[]): I;
 

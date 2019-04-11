@@ -49,11 +49,11 @@ class IntegerGenerator extends NumericGenerator<IntegerIndividual> {
    * Constructs the individual given
    * the genotype and the range.
    * @param genotype of the individual.
-   * @param range of the individual.
+   * @param params of the generator.
    * @return [[NumericIndividual]] constructed with the given params.
    */
-  public construct(genotype: number[], range: NumericRange): IntegerIndividual {
-    return new IntegerIndividual(genotype, range);
+  public construct(genotype: number[], params: NumericParams): IntegerIndividual {
+    return new IntegerIndividual(genotype, params.range);
   }
 }
 
