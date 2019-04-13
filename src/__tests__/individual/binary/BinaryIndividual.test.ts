@@ -5,41 +5,25 @@
  */
 
 import { BinaryIndividual } from '../../../lib/individual/binary';
-import BaseIndividualTests from '../../test-data/BaseIndividualTest';
-import BaseIndividualMock from '../../test-data/individual/BaseIndividualMock';
-import BaseIndividualMocks from '../../test-data/individual/binary';
-import mutableIndividualTestSuite from '../../test-data/suites/MutableIndividualTestSuite';
+import BinaryIndividualMocks from '../../resources/mocks/individual/binary';
 
-const creation = (initializationParams: BaseIndividualMock<BinaryIndividual, boolean>['initialization']) => {
-  return new BinaryIndividual(initializationParams.definition);
+// import mock interfaces
+import BinaryIndividualMock from '../../resources/mocks/individual/binary/BinaryIndividualMock';
+
+// test suites import
+import baseIndividualTestSuite from '../../resources/suites/individual/base/BaseIndividualTestSuite';
+import mutableIndividualTestSuite from '../../resources/suites/individual/base/MutableIndividualTestSuite';
+import binaryIndividualTestSuite from '../../resources/suites/individual/binary/BinaryIndividualTestSuite';
+
+const creation = (initializationParams: BinaryIndividualMock) => {
+  return new BinaryIndividual(initializationParams.creation.representation);
 };
 
-Object.keys(BaseIndividualMocks).forEach(key => {
-  const test = BaseIndividualMocks[key];
-  mutableIndividualTestSuite<BinaryIndividual, boolean>(test, creation);
-});
-
-describe('binary individual test', () => {
-  BaseIndividualTests.forEach(individualTest => {
-    const initialization = individualTest.initialization.value;
-    const expectedGenotype = individualTest.initialization.genotype;
-    const indType = individualTest.initialization.type;
-    let individual = new indType(initialization);
-
-    test('creation error', () => {
-      ['a', '010011 0 ff\rs', 'otherstring', '010o010'].forEach(initializationMsg => {
-        expect(() => new BinaryIndividual(initializationMsg)).toThrow(Error);
-      });
-    });
-
-    describe(`individual ${individual.toString()}`, () => {
-      beforeEach(() => {
-        individual = new indType(initialization);
-      });
-
-      test('creation test', () => {
-        expect(individual.genotype).toEqual(expectedGenotype);
-      });
-    });
+Object.keys(BinaryIndividualMocks).forEach(key => {
+  const test = BinaryIndividualMocks[key];
+  describe(`Tests for individual ${test.creation.representation}`, () => {
+    baseIndividualTestSuite(test, creation);
+    mutableIndividualTestSuite(test, creation);
+    binaryIndividualTestSuite(test);
   });
 });

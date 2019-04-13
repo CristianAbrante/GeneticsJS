@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import MutableIndividual from '../../../lib/individual/base/MutableIndividual';
+import MutableIndividual from '../../../../../lib/individual/base/MutableIndividual';
 import BaseIndividualMock from './BaseIndividualMock';
 
 interface CopyMethods<I extends MutableIndividual<T>, T> {

@@ -4,27 +4,21 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import BaseIndividual from '../../../lib/individual/base/BaseIndividual';
-import BaseIndividualMock from '../individual/BaseIndividualMock';
+import BaseIndividual from '../../../../../lib/individual/base/BaseIndividual';
+import BaseIndividualMock from '../../../mocks/individual/base/BaseIndividualMock';
 
-type CreationCallback<I extends BaseIndividual<T>, T> = (
-  initializationParams: BaseIndividualMock<I, T>['initialization'],
-) => I;
+type CreationCallback<I extends BaseIndividual<T>, T> = (...params: any[]) => I;
 
 const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
   mockIndividualTest: BaseIndividualMock<I, T>,
   creation: CreationCallback<I, T>,
 ) => {
-  describe(`BaseIndividual tests for individual ${mockIndividualTest.initialization.definition}`, () => {
-    let individual = creation(mockIndividualTest.initialization);
-    const expectedGenotype = mockIndividualTest.initialization.expectedGenotype;
+  describe('BaseIndividual tests', () => {
+    let individual = creation(mockIndividualTest);
+    const expectedGenotype = mockIndividualTest.expectedGenotype;
 
     beforeEach(() => {
-      individual = creation(mockIndividualTest.initialization);
-    });
-
-    test('creation test', () => {
-      expect(individual.genotype).toEqual(mockIndividualTest.initialization.expectedGenotype);
+      individual = creation(mockIndividualTest);
     });
 
     test(`iteration test`, () => {

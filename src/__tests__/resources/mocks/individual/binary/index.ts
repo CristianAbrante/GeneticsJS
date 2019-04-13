@@ -4,12 +4,11 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import MutableIndividualMock from '../MutableIndividualMock';
-import { BinaryIndividual } from './../../../../lib/individual/binary';
-import * as BinaryMock from './mock';
+import BinaryIndividualMock from './BinaryIndividualMock';
+import * as BinaryMock from './data';
 
 interface Mock {
-  [key: string]: MutableIndividualMock<BinaryIndividual, boolean>;
+  [key: string]: BinaryIndividualMock;
 }
 
 const mocks: Mock = {

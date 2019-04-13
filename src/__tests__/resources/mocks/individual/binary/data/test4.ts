@@ -4,11 +4,11 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { BinaryIndividual } from '../../../../../lib/individual/binary';
-import MutableIndividualMock from '../../MutableIndividualMock';
+import { BinaryIndividual } from '../../../../../../lib/individual/binary';
+import BinaryIndividualMock from '../BinaryIndividualMock';
 
 // 0 1 0 0 1 0 0 0
-export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
+export const I: BinaryIndividualMock = {
   copy: [
     {
       change: [{ geneIndex: 1, gene: true }, { geneIndex: 3, gene: true }],
@@ -25,6 +25,9 @@ export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
       },
     },
   ],
+  creation: {
+    representation: '0 1 0 0 1 0 0 0',
+  },
   deepCopy: [
     {
       change: [{ geneIndex: 1, gene: true }, { geneIndex: 3, gene: true }],
@@ -37,6 +40,7 @@ export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
       expected: false,
     },
   ],
+  expectedGenotype: [false, true, false, false, true, false, false, false],
   fill: [
     {
       expected: [true, true, true, true, true, false, false, false],
@@ -130,11 +134,6 @@ export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
       },
     },
   ],
-  initialization: {
-    definition: '01001000',
-    expectedGenotype: [false, true, false, false, true, false, false, false],
-    type: new BinaryIndividual(''),
-  },
   lastIndexOf: [
     {
       expected: 7,

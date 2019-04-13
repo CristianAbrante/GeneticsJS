@@ -4,26 +4,20 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import MutableIndividual from '../../../lib/individual/base/MutableIndividual';
-import MutableIndividualMock from '../individual/MutableIndividualMock';
-import BaseIndividualTestSuite from './BaseIndividualTestSuite';
+import MutableIndividual from '../../../../../lib/individual/base/MutableIndividual';
+import MutableIndividualMock from '../../../mocks/individual/base/MutableIndividualMock';
 
-type CreationCallback<I extends MutableIndividual<T>, T> = (
-  initializationParams: MutableIndividualMock<I, T>['initialization'],
-) => I;
+type CreationCallback<I extends MutableIndividual<T>, T> = (...params: any[]) => I;
 
 const mutableIndividualTestSuite = <I extends MutableIndividual<T>, T>(
   mockIndividualTest: MutableIndividualMock<I, T>,
   creation: CreationCallback<I, T>,
 ) => {
-  // Execution of the test suit for base individuals.
-  BaseIndividualTestSuite(mockIndividualTest, creation);
-
-  describe(`MutableIndividual tests for individual ${mockIndividualTest.initialization.definition}`, () => {
-    let individual = creation(mockIndividualTest.initialization);
+  describe('MutableIndividual tests', () => {
+    let individual = creation(mockIndividualTest);
 
     const initialize = () => {
-      individual = creation(mockIndividualTest.initialization);
+      individual = creation(mockIndividualTest);
     };
 
     beforeEach(() => {
