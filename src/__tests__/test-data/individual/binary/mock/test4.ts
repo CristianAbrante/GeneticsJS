@@ -12,13 +12,12 @@ export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
   copy: [
     {
       change: [{ geneIndex: 1, gene: true }, { geneIndex: 3, gene: true }],
-      expectedGenotype: [false, false, true, false],
       other: new BinaryIndividual('0010'),
     },
   ],
   copyWithin: [
     {
-      expected: [false, true, false, false, false, true, false, false],
+      expected: [false, true, false, false, true, false, false, false],
       params: {
         end: 0,
         start: 0,
@@ -29,7 +28,6 @@ export const I: MutableIndividualMock<BinaryIndividual, boolean> = {
   deepCopy: [
     {
       change: [{ geneIndex: 1, gene: true }, { geneIndex: 3, gene: true }],
-      expectedGenotype: [false, false, true, false],
       other: new BinaryIndividual('0010'),
     },
   ],

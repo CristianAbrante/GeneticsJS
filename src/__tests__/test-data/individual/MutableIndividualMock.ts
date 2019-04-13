@@ -12,7 +12,6 @@ interface CopyMethods<I extends MutableIndividual<T>, T> {
     geneIndex: number;
     gene: T;
   }>;
-  expectedGenotype: T[];
   other: I;
 }
 
@@ -30,8 +29,8 @@ interface MutableIndividualMock<I extends MutableIndividual<T>, T> extends BaseI
   fill?: Array<{
     params: {
       gene: T;
-      start: number;
-      end: number;
+      start?: number;
+      end?: number;
     };
     expected: T[];
   }>;
