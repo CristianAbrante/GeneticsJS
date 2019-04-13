@@ -39,13 +39,14 @@ const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
         expect(individual.get(geneIndex)).toBe(expectedGene);
       });
     });
-    test('get test', () => {
-      if (mockIndividualTest.get !== undefined) {
-        mockIndividualTest.get.forEach(test => {
+
+    if (mockIndividualTest.get !== undefined) {
+      test('get test', () => {
+        mockIndividualTest.get!.forEach(test => {
           expect(individual.get(test.params)).toEqual(test.expected);
         });
-      }
-    });
+      });
+    }
 
     test('get throws positive', () => {
       expect(() => individual.get(Infinity)).toThrow(RangeError);
@@ -55,11 +56,11 @@ const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
       expect(() => individual.get(-10)).toThrow(RangeError);
     });
 
-    test('length test', () => {
-      if (mockIndividualTest.length !== undefined) {
-        expect(individual.length()).toEqual(mockIndividualTest.length.expected);
-      }
-    });
+    if (mockIndividualTest.length !== undefined) {
+      test('length test', () => {
+        expect(individual.length()).toEqual(mockIndividualTest.length!.expected);
+      });
+    }
 
     test('entries test', () => {
       const entries = individual.entries();
@@ -83,29 +84,29 @@ const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
       ).toBeTruthy();
     });
 
-    test('every test', () => {
-      if (mockIndividualTest.every !== undefined) {
-        mockIndividualTest.every.forEach(everyTest => {
+    if (mockIndividualTest.every !== undefined) {
+      test('every test', () => {
+        mockIndividualTest.every!.forEach(everyTest => {
           expect(individual.every(everyTest.callback)).toEqual(everyTest.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('find test', () => {
-      if (mockIndividualTest.find !== undefined) {
-        mockIndividualTest.find.forEach(findTest => {
+    if (mockIndividualTest.find !== undefined) {
+      test('find test', () => {
+        mockIndividualTest.find!.forEach(findTest => {
           expect(individual.find(findTest.callback)).toEqual(findTest.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('findIndex test', () => {
-      if (mockIndividualTest.findIndex !== undefined) {
-        mockIndividualTest.findIndex.forEach(findIndexTest => {
+    if (mockIndividualTest.findIndex !== undefined) {
+      test('findIndex test', () => {
+        mockIndividualTest.findIndex!.forEach(findIndexTest => {
           expect(individual.findIndex(findIndexTest.callback)).toEqual(findIndexTest.expected);
         });
-      }
-    });
+      });
+    }
 
     test('naive forEach test', () => {
       let i = 0;
@@ -115,23 +116,23 @@ const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
       expect(result).toBeUndefined();
     });
 
-    test('includes test', () => {
-      if (mockIndividualTest.includes !== undefined) {
-        mockIndividualTest.includes.forEach(includesTest => {
+    if (mockIndividualTest.includes !== undefined) {
+      test('includes test', () => {
+        mockIndividualTest.includes!.forEach(includesTest => {
           const { gene, startIndex } = includesTest.params;
           expect(individual.includes(gene, startIndex)).toEqual(includesTest.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('indexOf test', () => {
-      if (mockIndividualTest.indexOf !== undefined) {
-        mockIndividualTest.indexOf.forEach(indexOfTest => {
+    if (mockIndividualTest.indexOf !== undefined) {
+      test('indexOf test', () => {
+        mockIndividualTest.indexOf!.forEach(indexOfTest => {
           const { gene, startIndex } = indexOfTest.params;
           expect(individual.indexOf(gene, startIndex)).toEqual(indexOfTest.expected);
         });
-      }
-    });
+      });
+    }
 
     test('keys test', () => {
       const keys = individual.keys();
@@ -145,28 +146,28 @@ const baseIndividualTestSuite = <I extends BaseIndividual<T>, T>(
       expect(outNext.done).toBeTruthy();
     });
 
-    test('lastIndexOf test', () => {
-      if (mockIndividualTest.lastIndexOf !== undefined) {
-        mockIndividualTest.lastIndexOf.forEach(lastIndexOftest => {
+    if (mockIndividualTest.lastIndexOf !== undefined) {
+      test('lastIndexOf test', () => {
+        mockIndividualTest.lastIndexOf!.forEach(lastIndexOftest => {
           const { gene, fromIndex } = lastIndexOftest.params;
           expect(individual.lastIndexOf(gene, fromIndex)).toEqual(lastIndexOftest.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('some test', () => {
-      if (mockIndividualTest.some !== undefined) {
-        mockIndividualTest.some.forEach(someTest => {
+    if (mockIndividualTest.some !== undefined) {
+      test('some test', () => {
+        mockIndividualTest.some!.forEach(someTest => {
           expect(individual.some(someTest.callback)).toEqual(someTest.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('toString test', () => {
-      if (mockIndividualTest.toStringTest !== undefined) {
-        expect(individual.toString()).toEqual(mockIndividualTest.toStringTest.expected);
-      }
-    });
+    if (mockIndividualTest.toStringTest !== undefined) {
+      test('toString test', () => {
+        expect(individual.toString()).toEqual(mockIndividualTest.toStringTest!.expected);
+      });
+    }
 
     test('values test', () => {
       const values = individual.values();

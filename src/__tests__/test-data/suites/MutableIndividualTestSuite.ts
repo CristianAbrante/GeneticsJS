@@ -30,9 +30,9 @@ const mutableIndividualTestSuite = <I extends MutableIndividual<T>, T>(
       initialize();
     });
 
-    test('copy test', () => {
-      const copyTest = mockIndividualTest.copy;
-      if (copyTest !== undefined) {
+    if (mockIndividualTest.copy !== undefined) {
+      test('copy test', () => {
+        const copyTest = mockIndividualTest.copy!;
         copyTest.forEach(test => {
           initialize();
           individual.copy(test.other);
@@ -42,13 +42,13 @@ const mutableIndividualTestSuite = <I extends MutableIndividual<T>, T>(
           });
           expect(individual.genotype).toEqual(test.other.genotype);
         });
-      }
-    });
+      });
+    }
 
-    test('deepCopy test', () => {
-      const copyTest = mockIndividualTest.deepCopy;
-      if (copyTest !== undefined) {
-        copyTest.forEach(test => {
+    if (mockIndividualTest.deepCopy !== undefined) {
+      test('deepCopy test', () => {
+        const copyTest = mockIndividualTest.deepCopy;
+        copyTest!.forEach(test => {
           initialize();
           individual.deepCopy(test.other);
           expect(individual.genotype).toEqual(test.other.genotype);
@@ -57,62 +57,62 @@ const mutableIndividualTestSuite = <I extends MutableIndividual<T>, T>(
           });
           expect(individual.genotype).not.toEqual(test.other.genotype);
         });
-      }
-    });
+      });
+    }
 
-    test('copyWithin test', () => {
-      const copyWithinTests = mockIndividualTest.copyWithin;
-      if (copyWithinTests !== undefined) {
+    if (mockIndividualTest.copyWithin !== undefined) {
+      test('copyWithin test', () => {
+        const copyWithinTests = mockIndividualTest.copyWithin!;
         copyWithinTests.forEach(test => {
           initialize();
           const { target, start, end } = test.params;
           individual.copyWithin(target, start, end);
           expect(individual.genotype).toEqual(test.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('fill test', () => {
-      const fillTests = mockIndividualTest.fill;
-      if (fillTests !== undefined) {
+    if (mockIndividualTest.fill !== undefined) {
+      test('fill test', () => {
+        const fillTests = mockIndividualTest.fill!;
         fillTests.forEach(test => {
           initialize();
           const { gene, start, end } = test.params;
           individual.fill(gene, start, end);
           expect(individual.genotype).toEqual(test.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('map test', () => {
-      const mapTests = mockIndividualTest.map;
-      if (mapTests !== undefined) {
+    if (mockIndividualTest.map !== undefined) {
+      test('map test', () => {
+        const mapTests = mockIndividualTest.map!;
         mapTests.forEach(test => {
           initialize();
           individual.map(test.callback);
           expect(individual.genotype).toEqual(test.expected);
         });
-      }
-    });
+      });
+    }
 
-    test('reverse test', () => {
-      const reverseTest = mockIndividualTest.reverse;
-      if (reverseTest !== undefined) {
+    if (mockIndividualTest.reverse !== undefined) {
+      test('reverse test', () => {
+        const reverseTest = mockIndividualTest.reverse!;
         individual.reverse();
         expect(individual.genotype).toEqual(reverseTest.expected);
-      }
-    });
+      });
+    }
 
-    test('set test', () => {
-      const setTests = mockIndividualTest.set;
-      if (setTests !== undefined) {
+    if (mockIndividualTest.set !== undefined) {
+      test('set test', () => {
+        const setTests = mockIndividualTest.set!;
         setTests.forEach(test => {
           const { geneIndex, gene } = test.params;
           individual.set(geneIndex, gene);
           expect(individual.get(geneIndex)).toEqual(gene);
         });
-      }
-    });
+      });
+    }
   });
 };
 
