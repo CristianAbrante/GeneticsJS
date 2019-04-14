@@ -32,6 +32,10 @@ abstract class NumericIndividual extends MutableIndividual<number> {
     lowest: Number.NEGATIVE_INFINITY,
   };
 
+  public static isAValidRange(range: NumericRange): boolean {
+    return range.lowest < range.highest;
+  }
+
   /**
    * range of the individual.
    */
@@ -45,9 +49,13 @@ abstract class NumericIndividual extends MutableIndividual<number> {
    * @param range of the individual, if not provided
    *        or undefined it is set to default range.
    */
-  constructor(genotype: number[], range?: NumericRange) {
+  protected constructor(genotype: number[], range?: NumericRange) {
     super(genotype);
-    this.setRange(range);
+    if (range === undefined) {
+      this.setRange(NumericIndividual.DEFAULT_RANGE);
+    } else {
+      this.setRange(range);
+    }
   }
 
   /**
@@ -97,11 +105,12 @@ abstract class NumericIndividual extends MutableIndividual<number> {
   /**
    * Fill the genotype with the specified gene.
    * @param gene we want to fill the genotype with.
-   * @param start position.
-   * @param end position.
+   * @param start position. By default is `0`.
+   * @param end position. By default is the length of
+   *        the individual.
    * @throws RangeError if gene is not in range.
    */
-  public fill(gene: number, start: number, end: number) {
+  public fill(gene: number, start: number = 0, end: number = this.length()) {
     this.checkGeneRange(gene);
     super.fill(gene, start, end);
   }
@@ -129,16 +138,23 @@ abstract class NumericIndividual extends MutableIndividual<number> {
    *        if it is `undefined` it is set with
    *        the default range.
    * @throws Error if range is invalid.
+   * @throws RangeError if any gene of the genotype
+   *          is not in range.
    */
-  protected setRange(range?: NumericRange) {
-    if (range === undefined) {
-      this._range = NumericIndividual.DEFAULT_RANGE;
-    } else {
-      if (range.lowest < range.highest) {
-        this._range = range;
-      } else {
-        throw new Error('range is not valid, first element must be lower than last');
-      }
+  protected setRange(range: NumericRange) {
+    this.checkRange(range);
+    this._range = range;
+    this.checkGenotype(this.genotype);
+  }
+
+  /**
+   * Method test if a range is valid.
+   * @param range to be checked.
+   * @throws Error if range is not valid.
+   */
+  protected checkRange(range: NumericRange) {
+    if (!NumericIndividual.isAValidRange(range)) {
+      throw new Error(`Error: Range [${range.lowest} - ${range.highest}] is not valid.`);
     }
   }
 
@@ -161,6 +177,29 @@ abstract class NumericIndividual extends MutableIndividual<number> {
    */
   protected geneIsInRange(gene: number): boolean {
     return gene >= this.range.lowest && gene <= this.range.highest;
+  }
+
+  /**
+   * Checks if all genes in genotype
+   * are in range. If it is not in
+   * range it throws a RangeError.
+   * @param genotype to be checked.
+   */
+  protected checkGenotype(genotype: number[]) {
+    if (!this.genotypeIsInRange(genotype)) {
+      throw new RangeError(`RangeError: genotype is not in range.`);
+    }
+  }
+
+  /**
+   * Checks if all genes in genotype
+   * are in range
+   * @param genotype to be checked.
+   * @return `true` if all genes are in
+   *          range and `false` otherwise.
+   */
+  protected genotypeIsInRange(genotype: number[]): boolean {
+    return genotype.every(gene => this.geneIsInRange(gene));
   }
 
   /**
