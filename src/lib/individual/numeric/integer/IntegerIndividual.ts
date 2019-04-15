@@ -56,7 +56,7 @@ class IntegerIndividual extends NumericIndividual {
    */
   constructor(representation: number[] | string, range?: NumericRange) {
     if (typeof representation === 'string') {
-      super([], range);
+      super([]);
       const reader = new IntegerReader();
       this.copy(reader.read(representation));
     } else {

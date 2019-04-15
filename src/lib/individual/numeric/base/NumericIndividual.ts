@@ -12,8 +12,8 @@ import { MutableIndividual } from './../../base/';
  * a range.
  */
 export interface NumericRange {
-  lowest: number;
-  highest: number;
+  readonly lowest: number;
+  readonly highest: number;
 }
 
 /**
