@@ -13,7 +13,7 @@ interface FloatingIndividualMock extends NumericIndividualMock<FloatingIndividua
     representation: string | number[];
     range?: NumericRange;
   };
-  creationError: Array<{
+  creationError?: Array<{
     representation: string | number[];
     range?: NumericRange;
   }>;

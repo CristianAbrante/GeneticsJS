@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import NumericIndividual from '../../../../../../lib/individual/numeric/base/NumericIndividual';
+import NumericIndividual, { NumericRange } from '../../../../../../lib/individual/numeric/base/NumericIndividual';
 import MutableIndividualMock from '../../base/MutableIndividualMock';
 
 interface NumericIndividualMock<I extends NumericIndividual> extends MutableIndividualMock<I, number> {
+  expectedRange: NumericRange;
   setError?: Array<{
     params: {
       geneIndex: number;
