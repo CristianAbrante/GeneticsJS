@@ -7,7 +7,7 @@
 import { NumericIndividual } from './../../../../../../lib/individual/numeric/base';
 import NumericIndividualMock from './../../../../mocks/individual/numeric/base/NumericIndividualMock';
 
-type CreationCallback<I extends NumericIndividual> = (numericIndividualTests: NumericIndividualMock<I>) => I;
+type CreationCallback<I extends NumericIndividual> = (...args: any[]) => I;
 
 const numericIndividualTestSuite = (
   numericIndividualTests: NumericIndividualMock<NumericIndividual>,
