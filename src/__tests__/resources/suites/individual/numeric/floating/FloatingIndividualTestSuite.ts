@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import FloatingIndividualMock from '../../../../mocks/individual/numeric/floating/FloatingIndividualMock';
 import FloatingIndividual from '../../../../../../lib/individual/numeric/floating/FloatingIndividual';
+import FloatingIndividualMock from '../../../../mocks/individual/numeric/floating/FloatingIndividualMock';
 
 const floatingIndividualTestSuite = (floatingIndividualTests: FloatingIndividualMock) => {
   describe('FloatingIndividual test suite', () => {
@@ -13,7 +13,7 @@ const floatingIndividualTestSuite = (floatingIndividualTests: FloatingIndividual
       const { representation, range } = floatingIndividualTests.creation;
       const individual = new FloatingIndividual(representation, range);
       expect(individual.genotype).toEqual(floatingIndividualTests.expectedGenotype);
-      expect(individual.genotype).toEqual(floatingIndividualTests.expectedRange);
+      expect(individual.range).toEqual(floatingIndividualTests.expectedRange);
     });
 
     if (floatingIndividualTests.creationError !== undefined) {

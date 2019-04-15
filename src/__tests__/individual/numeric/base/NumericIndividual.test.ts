@@ -27,7 +27,7 @@ describe('range error test', () => {
   });
 
   test('set out of range', () => {
-    const ind = new IntegerIndividual([2, 4, 6], { lowest: 3, highest: 8 });
+    const ind = new IntegerIndividual([2, 4, 6], { lowest: 1, highest: 8 });
     ind.set(1, 5);
     expect(ind.get(1)).toEqual(5);
     ind.set(1, 3);
@@ -39,12 +39,12 @@ describe('range error test', () => {
   });
 
   test('fill out of range', () => {
-    const ind = new IntegerIndividual([2, 4, 6], { lowest: 3, highest: 8 });
+    const ind = new IntegerIndividual([2, 4, 6], { lowest: 1, highest: 8 });
     expect(() => ind.fill(40)).toThrow(RangeError);
   });
 
   test('map out of range test', () => {
-    const ind = new IntegerIndividual([2, 4, 6], { lowest: 3, highest: 8 });
+    const ind = new IntegerIndividual([2, 4, 6], { lowest: 1, highest: 8 });
     expect(() => ind.map(gene => 40 * gene)).toThrow(RangeError);
   });
 });
