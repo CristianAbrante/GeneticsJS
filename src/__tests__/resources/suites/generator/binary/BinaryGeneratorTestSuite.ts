@@ -30,7 +30,7 @@ const binaryGeneratorTestSuite = <
 
   describe('chance error with positive chance', () => {
     expect(() => generator.generate(params.length, Number.POSITIVE_INFINITY, params.engine)).toThrow(Error);
-    expect(() => generator.generate(params.length, 1.0000000000000000000001, params.engine)).toThrow(Error);
+    expect(() => generator.generate(params.length, 1.001, params.engine)).toThrow(Error);
     expect(() => generator.generate(params.length, 1000, params.engine)).toThrow(Error);
   });
 };

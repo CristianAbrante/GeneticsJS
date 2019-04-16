@@ -14,8 +14,8 @@ const generatorTestSuite = <
   Params extends GeneratorParams,
   T
 >(
-  params: Params,
   generator: G,
+  params: Params,
 ) => {
   describe('BaseGenerator tests', () => {
     test('length test with generateWith', () => {
