@@ -15,12 +15,12 @@ const generatorTestSuite = <
   T
 >(
   generator: G,
+  individual: I,
   params: Params,
 ) => {
   describe('BaseGenerator tests', () => {
     test('length test with generateWith', () => {
-      const ind = generator.generateWith(params);
-      expect(ind.length()).toEqual(params.length);
+      expect(individual.length()).toEqual(params.length);
     });
   });
 };

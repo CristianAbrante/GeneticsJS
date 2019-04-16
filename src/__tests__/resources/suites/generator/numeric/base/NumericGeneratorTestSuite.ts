@@ -13,13 +13,13 @@ const numericIndividualTestSuite = <
   Params extends NumericParams
 >(
   generator: G,
+  individual: I,
   params: Params,
 ) => {
   test('range check test', () => {
-    const ind = generator.generateWith(params);
     const { range } = params;
-    ind.forEach(gene => {
-      expect(range.lowest >= gene && gene <= range.highest).toBeTruthy();
+    individual.forEach(gene => {
+      expect(range.lowest <= gene && gene <= range.highest).toBeTruthy();
     });
   });
 };

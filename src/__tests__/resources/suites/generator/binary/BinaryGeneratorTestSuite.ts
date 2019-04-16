@@ -13,12 +13,12 @@ const binaryGeneratorTestSuite = <
   Params extends BinaryGeneratorParams
 >(
   generator: G,
+  individual: I,
   params: Params,
 ) => {
   describe('BinaryGenerator tests', () => {
     test('creation length test', () => {
-      const ind = generator.generate(params.length, params.chance, params.engine);
-      expect(ind.length()).toEqual(params.length);
+      expect(individual.length()).toEqual(params.length);
     });
   });
 

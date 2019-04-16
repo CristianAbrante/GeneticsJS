@@ -14,7 +14,8 @@ const { BinaryGenerator } = Genetics.generator;
 BinaryGeneratorMock.forEach(testParams => {
   describe(`Tests with params: ${testParams.length} - ${testParams.chance}`, () => {
     const generator = new BinaryGenerator();
-    BaseGeneratorSuite(generator, testParams);
-    BinaryGeneratorSuite(generator, testParams);
+    const ind = generator.generateWith(testParams);
+    BaseGeneratorSuite(generator, ind, testParams);
+    BinaryGeneratorSuite(generator, ind, testParams);
   });
 });
