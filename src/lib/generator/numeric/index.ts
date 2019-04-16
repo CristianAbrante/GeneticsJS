@@ -6,7 +6,7 @@
 
 import * as Base from './base';
 import * as Floating from './floating';
-import * as Integer from './floating';
+import * as Integer from './integer';
 
 const numericGenerators = {
   ...Base,

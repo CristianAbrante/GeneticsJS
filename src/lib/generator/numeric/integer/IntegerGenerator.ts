@@ -29,8 +29,14 @@ class IntegerGenerator extends NumericGenerator<IntegerIndividual> {
     const randomJSMax = 2 ** 53;
     const randomJSMin = -randomJSMax;
     return {
-      highest: range.highest === NumericIndividual.DEFAULT_RANGE.highest ? randomJSMax : range.highest,
-      lowest: range.lowest === NumericIndividual.DEFAULT_RANGE.lowest ? randomJSMin : range.lowest,
+      highest:
+        range.highest === NumericIndividual.DEFAULT_RANGE.highest
+          ? randomJSMax
+          : IntegerIndividual.normalize(range.highest),
+      lowest:
+        range.lowest === NumericIndividual.DEFAULT_RANGE.lowest
+          ? randomJSMin
+          : IntegerIndividual.normalize(range.lowest),
     };
   }
 

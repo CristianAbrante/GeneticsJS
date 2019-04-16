@@ -17,7 +17,7 @@ class IntegerIndividual extends NumericIndividual {
    * Normalize the given gene, rounding it.
    * @param gene that we want to normalize.
    */
-  private static normalize(gene: number): number {
+  public static normalize(gene: number): number {
     return Math.round(gene);
   }
 
