@@ -1,6 +1,6 @@
 {
   "name": "genetics-js",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Genetic and evolutionary algorithms framework for the web",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
