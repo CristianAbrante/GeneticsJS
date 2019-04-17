@@ -1,7 +1,5 @@
 <h1 align="center">
-  <a href="https://geneticsjs.wordpress.com/">
-    <img src="assets/images/logo.png" alt="genetics.js logo" width="400">
-  </a>
+  <img src="assets/images/logo.png" alt="genetics.js logo" width="400">
 </h1>
 
 <h4 align="center">
@@ -86,7 +84,7 @@ individual.genotype // [false, false, true, true, false, false]
 The roadmap is strictly determined by the operations that are going to be 
 implemented:
 
-- [ ] `v0.1.0`: Implementation of **individuals**.
+- [x] `v0.1.0`: Implementation of **individuals**.
 - [ ] `v0.2.0`: Implementation of **mutation operators**.
 - [ ] `v0.3.0`: Implementation of **recombination operators**.
 - [ ] `v0.4.0`: Implementation of **parent selection methods**.

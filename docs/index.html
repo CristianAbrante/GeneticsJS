@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>genetics-js</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">genetics-js</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> genetics-js</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 align="center">
+					<img src="../assets/images/logo.png" alt="genetics.js logo" width="400">
+				</h1>
+				<h4 align="center">
+					Evolutionary algorithms library for the web.
+				</h4>
+				<p align="center">
+					<a href="https://github.com/CristianAbrante/GeneticsJS/blob/master/LICENSE">
+						<img alt="GitHub" src="https://img.shields.io/github/license/CristianAbrante/GeneticsJS.svg">
+					</a>
+					<a href="https://circleci.com/gh/CristianAbrante/workflows/GeneticsJS">
+						<img alt="CircleCI branch" src="https://img.shields.io/circleci/project/github/CristianAbrante/GeneticsJS/master.svg">
+					</a>
+					<a href="https://coveralls.io/github/CristianAbrante/GeneticsJS">
+						<img alt="Coveralls github" src="https://img.shields.io/coveralls/github/CristianAbrante/GeneticsJS.svg">
+					</a>
+					<a href="https://github.com/ellerbrock/open-source-badges/">
+						<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103g" alt="Open source">
+					</a>
+					<a href="https://coveralls.io/github/CristianAbrante/GeneticsJS">
+						<img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/CristianAbrante/GeneticsJS.svg">
+					</a>
+					<a href="https://geneticsjs.wordpress.com/">
+						<img alt="Website" src="https://img.shields.io/website/https/geneticsjs.wordpress.com.svg">
+					</a>
+					<a href="https://twitter.com/GeneticsJs">
+						<img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/GeneticsJS.svg?label=Follow&style=social">
+					</a>
+				</p>
+				<p align="center">
+					<a href="#introduction">Introduction</a> •
+					<a href="#installation">Installation</a> •
+					<a href="#usage">Usage</a> •
+					<a href="#roadmap">Roadmap</a> •
+					<a href="#contributing">Contributing</a> •
+					<a href="#authors">Authors</a> •
+					<a href="#license">License</a>
+				</p>
+				<h2 id="-books-introduction">:books: Introduction</h2>
+				<p>Evolutionary computing is one of the main techniques nowadays
+					for solving complex optimization problems. This library provides
+					with the basic structure for implementing the most common evolutionary
+				algorithms, such as <strong>genetic algorithms</strong>.</p>
+				<p align="center">
+					<img src="../assets/images/ea-structure.jpg" align="center" alt="drawing" width="400"/>
+				</p>
+				<blockquote>
+					<p>Evolutionary algorithms basic structure</p>
+				</blockquote>
+				<p>Evolutionary algorithms are composed basically by four elements:</p>
+				<ul>
+					<li><strong>Individuals</strong>: Represent possible solutions of our problem in a determinate search space.</li>
+					<li><strong>Mutation</strong>: Mutation operator alterates one individual.</li>
+					<li><strong>Recombination</strong>: Recombination operator takes two parents and creates the offspring.</li>
+					<li><strong>Parent selection</strong>: Selection of the <em>best</em> parents that are going to be reproduced in the next generation.</li>
+					<li><strong>Survivor selection</strong>: Selection of the offspring and parents that are going to be the next generation.</li>
+				</ul>
+				<p>This framework is going to provide the most common techniques for each component.</p>
+				<h2 id="-wrench-installation">:wrench: Installation</h2>
+				<p>Currently project is <strong>under development (no stable version released :warning:)</strong>, but it is going to be installed
+				through npm:</p>
+				<pre><code>npm <span class="hljs-keyword">install</span> genetics-js</code></pre><h2 id="-usage">🧬 Usage</h2>
+				<p>No major versions have been released, so only <strong>Individuals</strong> creation is implemented:</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Genetics <span class="hljs-keyword">from</span> <span class="hljs-string">'genetics-js'</span>;
+<span class="hljs-keyword">const</span> { BinaryIndividual } = Genetics.individual;
+
+<span class="hljs-keyword">let</span> individual = <span class="hljs-keyword">new</span> BinaryIndividual(<span class="hljs-string">'001100'</span>);
+individual.genotype <span class="hljs-comment">// [false, false, true, true, false, false]</span></code></pre>
+				<h2 id="-stars-roadmap">:stars: Roadmap</h2>
+				<p>The roadmap is strictly determined by the operations that are going to be
+				implemented:</p>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> <code>v0.1.0</code>: Implementation of <strong>individuals</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.2.0</code>: Implementation of <strong>mutation operators</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.3.0</code>: Implementation of <strong>recombination operators</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.4.0</code>: Implementation of <strong>parent selection methods</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.5.0</code>: Implementation of <strong>survivor selection methods</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.6.0</code>: Implementation of <strong>population and offspring management</strong>.</li>
+					<li><input disabled="" type="checkbox"> <code>v0.7.0</code>: Implementation of <strong>common evolutionary algorithms</strong> with fixed configurations.</li>
+				</ul>
+				<h2 id="-open_hands-contributing">:open_hands: Contributing</h2>
+				<p>You can report a bug, or request a feature with an issue:</p>
+				<ul>
+					<li><a href="https://github.com/CristianAbrante/GeneticsJS/issues/new?assignees=&amp;labels=&amp;template=bug-report.md&amp;title=%3Abug%3A">Report a bug :bug: with this template.</a>.</li>
+					<li><a href="https://github.com/CristianAbrante/GeneticsJS/issues/new?assignees=&amp;labels=&amp;template=feature_request.md&amp;title=">Request a feature :bulb: with this template.</a></li>
+				</ul>
+				<p>Any help would be welcome :smile:.</p>
+				<h2 id="-muscle-authors">:muscle: Authors</h2>
+				<ul>
+					<li><strong>Cristian Abrante</strong> - <a href="https://github.com/CristianAbrante">CristianAbrante</a> - ([<a href="mailto:cristian@abrante.me">cristian@abrante.me</a>])</li>
+				</ul>
+				<h2 id="-memo-license">:memo: License</h2>
+				<p>This project is licensed under the <strong><a href="https://github.com/CristianAbrante/GeneticsJS/blob/master/LICENSE">MIT License</a></strong></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_base_basegenerator_.html">"lib/generator/base/<wbr>Base<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_base_generatorparams_.html">"lib/generator/base/<wbr>Generator<wbr>Params"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_base_individualgenerator_.html">"lib/generator/base/<wbr>Individual<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_base_index_.html">"lib/generator/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_binary_binarygenerator_.html">"lib/generator/binary/<wbr>Binary<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_binary_index_.html">"lib/generator/binary/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_index_.html">"lib/generator/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_base_numericgenerator_.html">"lib/generator/numeric/base/<wbr>Numeric<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_base_index_.html">"lib/generator/numeric/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_floating_floatinggenerator_.html">"lib/generator/numeric/floating/<wbr>Floating<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_floating_index_.html">"lib/generator/numeric/floating/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_index_.html">"lib/generator/numeric/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_integer_integergenerator_.html">"lib/generator/numeric/integer/<wbr>Integer<wbr>Generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_generator_numeric_integer_index_.html">"lib/generator/numeric/integer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_base_baseindividual_.html">"lib/individual/base/<wbr>Base<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_base_mutable_.html">"lib/individual/base/<wbr>Mutable"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_base_mutableindividual_.html">"lib/individual/base/<wbr>Mutable<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_base_index_.html">"lib/individual/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_binary_binaryindividual_.html">"lib/individual/binary/<wbr>Binary<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_binary_index_.html">"lib/individual/binary/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_index_.html">"lib/individual/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_base_numericindividual_.html">"lib/individual/numeric/base/<wbr>Numeric<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_base_index_.html">"lib/individual/numeric/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_floating_floatingindividual_.html">"lib/individual/numeric/floating/<wbr>Floating<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_floating_index_.html">"lib/individual/numeric/floating/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_index_.html">"lib/individual/numeric/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_integer_integerindividual_.html">"lib/individual/numeric/integer/<wbr>Integer<wbr>Individual"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_individual_numeric_integer_index_.html">"lib/individual/numeric/integer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_base_baseindividualreader_.html">"lib/reader/base/<wbr>Base<wbr>Individual<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_base_individualreader_.html">"lib/reader/base/<wbr>Individual<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_base_index_.html">"lib/reader/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_binary_binaryreader_.html">"lib/reader/binary/<wbr>Binary<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_binary_index_.html">"lib/reader/binary/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_index_.html">"lib/reader/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_base_numericreader_.html">"lib/reader/numeric/base/<wbr>Numeric<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_base_index_.html">"lib/reader/numeric/base/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_floating_floatingreader_.html">"lib/reader/numeric/floating/<wbr>Floating<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_floating_index_.html">"lib/reader/numeric/floating/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_index_.html">"lib/reader/numeric/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_integer_integerreader_.html">"lib/reader/numeric/integer/<wbr>Integer<wbr>Reader"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_reader_numeric_integer_index_.html">"lib/reader/numeric/integer/index"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
