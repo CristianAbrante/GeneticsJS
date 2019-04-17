@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/images/logo.png" alt="genetics.js logo" width="400">
+  <img src="https://github.com/CristianAbrante/GeneticsJS/raw/master/assets/images/logo.png" alt="genetics.js logo" width="400">
 </h1>
 
 <h4 align="center">
