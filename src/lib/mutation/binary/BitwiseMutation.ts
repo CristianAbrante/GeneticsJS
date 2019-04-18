@@ -27,12 +27,12 @@ class BitwiseMutation implements Mutation<BinaryIndividual, boolean, BitwisePara
 
   public mutateWith(individual: BinaryIndividual, params: BitwiseParams): void {
     checkProbability(params.mutationRate);
-    for (let i = 0; i < individual.length(); i++) {
-      const d = generateProbability(params.engine);
-      if (d <= params.mutationRate) {
-        individual.flip(i);
+    individual.forEach((_, index) => {
+      const threshold = generateProbability(params.engine);
+      if (threshold <= params.mutationRate) {
+        individual.flip(index!);
       }
-    }
+    });
   }
 }
 
