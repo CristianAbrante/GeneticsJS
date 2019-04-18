@@ -56,6 +56,10 @@ class BinaryIndividual extends MutableIndividual<boolean> {
     this.setGenotype(Array.from(other.genotype));
   }
 
+  public flip(index: number) {
+    this.set(index, !this.get(index));
+  }
+
   /**
    * Converts a gene to string, useful for method
    * `toString`.
