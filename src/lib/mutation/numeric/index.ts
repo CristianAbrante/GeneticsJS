@@ -4,5 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-export { default as CreepMutation } from './CreepMutation';
-export { default as RandomResetting } from './RandomResetting';
+import * as Integer from './integer';
+
+export default {
+  ...Integer,
+};

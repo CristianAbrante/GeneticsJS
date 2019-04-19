@@ -11,19 +11,12 @@ import Mutation, { MutationParams } from '../../base/Mutation';
 
 export interface CreepMutationParams extends MutationParams {
   stepSize: number;
-  mean: number;
 }
 
 class CreepMutation implements Mutation<IntegerIndividual, number, CreepMutationParams> {
-  public mutate(
-    individual: IntegerIndividual,
-    stepSize: number = 1,
-    mean: number = 0,
-    engine = Generator.DEFAULT_ENGINE,
-  ): void {
+  public mutate(individual: IntegerIndividual, stepSize: number = 1, engine = Generator.DEFAULT_ENGINE): void {
     this.mutateWith(individual, {
       engine,
-      mean,
       stepSize,
     });
   }
@@ -37,7 +30,7 @@ class CreepMutation implements Mutation<IntegerIndividual, number, CreepMutation
 
   private getMutatedGeneValue(individual: IntegerIndividual, index: number, params: CreepMutationParams) {
     const gene = individual.get(index);
-    const delta = Generator.generateNormalDistributionInteger(params.mean, params.stepSize, params.engine);
+    const delta = Generator.generateNormalDistributionInteger(0, params.stepSize, params.engine);
     return NumericRange.normalizeValueToRange(gene + delta, individual.range);
   }
 }

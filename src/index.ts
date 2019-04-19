@@ -6,10 +6,12 @@
 
 import * as generator from './lib/generator';
 import * as individual from './lib/individual';
+import * as mutation from './lib/mutation';
 import * as reader from './lib/reader';
 
 export default {
   generator: generator.default,
   individual: individual.default,
+  mutation: mutation.default,
   reader: reader.default,
 };

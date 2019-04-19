@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-// @ts-ignore
-import Prob from 'prob.js';
+const prob = require('prob.js');
 import { bool, Engine, integer, MersenneTwister19937, real } from 'random-js';
 import { NumericRange } from '../../individual/numeric/base';
 import { IntegerNormalizer } from '../../individual/numeric/integer/utils';
@@ -39,8 +38,8 @@ class Generator {
     stdVar: number = 1.0,
     engine: Engine = Generator.DEFAULT_ENGINE,
   ): number {
-    const normal = Prob.normal(mean, stdVar);
-    return normal(engine);
+    const normal = prob.normal(mean, stdVar);
+    return normal();
   }
 
   public static generateNormalDistributionInteger(
