@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { bool, Engine, MersenneTwister19937 } from 'random-js';
 import { BaseGenerator, GeneratorParams } from '../base';
+import { Generator } from '../utils';
 import { BinaryIndividual } from './../../individual/binary';
 
 /**
@@ -26,23 +26,13 @@ export interface BinaryGeneratorParams extends GeneratorParams {
  */
 class BinaryGenerator extends BaseGenerator<BinaryIndividual, BinaryGeneratorParams, boolean> {
   /**
-   * Test if chance is in range [0.0 - 1.0]
-   * @param chance that is going to be tested.
-   * @return `true` if chance is in the range and
-   *         `false` otherwise.
-   */
-  protected static chanceIsInRange(chance: number): boolean {
-    return chance >= 0.0 && chance <= 1.0;
-  }
-
-  /**
    * Throws an exception if chance is not in
    * range [0.0 - 1.0].
    * @param chance that is going to be tested.
    * @throws RangeError if chance is not in range.
    */
   protected static checkChance(chance: number) {
-    if (!this.chanceIsInRange(chance)) {
+    if (!Generator.probabilityIsValid(chance)) {
       throw new RangeError(`BinaryGenerator: chance ${chance} is not in range [0.0 - 1.0]`);
     }
   }
@@ -54,16 +44,11 @@ class BinaryGenerator extends BaseGenerator<BinaryIndividual, BinaryGeneratorPar
    * @param chance of a generated gene to be `true`.
    *        By default is `0.5`.
    * @param engine (of `random-js`) that is going to be used.
-   *        By default is `MersenneTwister19937.autoSeed()`.
    * @return The [[BinaryIndividual]] with the generated genotype.
    * @throws RangeError if `length` is not greater than `0`.
    * @throws RangeError if `chance` is not in range [0.0 - 1.0].
    */
-  public generate(
-    length: number,
-    chance: number = 0.5,
-    engine: Engine = MersenneTwister19937.autoSeed(),
-  ): BinaryIndividual {
+  public generate(length: number, chance: number = 0.5, engine = Generator.DEFAULT_ENGINE): BinaryIndividual {
     const params = { chance, engine, length };
     return this.generateWith(params);
   }
@@ -74,7 +59,7 @@ class BinaryGenerator extends BaseGenerator<BinaryIndividual, BinaryGeneratorPar
    * @return the generated gene.
    */
   public generateGene(params: BinaryGeneratorParams): boolean {
-    return bool(params.chance)(params.engine);
+    return Generator.generateBoolean(params.chance, params.engine);
   }
 
   /**

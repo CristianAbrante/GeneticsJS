@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { real } from 'random-js';
-import { NumericRange } from '../../../individual/numeric/base';
+import { Generator } from '../../utils';
 import { NumericParams } from '../base/NumericGenerator';
 import { FloatingIndividual } from './../../../individual/numeric/floating';
 import { NumericGenerator } from './../base';
@@ -22,7 +21,7 @@ class FloatingGenerator extends NumericGenerator<FloatingIndividual> {
    * @return the generated gene.
    */
   public generateGene(params: NumericParams): number {
-    return real(params.range.lowest, params.range.highest, true)(params.engine);
+    return Generator.generateFloating(params.range, params.engine);
   }
 
   /**

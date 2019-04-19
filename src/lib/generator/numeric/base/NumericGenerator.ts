@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { Engine, MersenneTwister19937 } from 'random-js';
 import { NumericIndividual, NumericRange } from '../../../individual/numeric/base';
+import { Generator } from '../../utils';
 import { BaseGenerator, GeneratorParams } from './../../base/';
 
 /**
@@ -31,16 +31,11 @@ abstract class NumericGenerator<I extends NumericIndividual> extends BaseGenerat
    * @param length of the individual that is going to be generated.
    * @param range of the individual that is going to be generated.
    * @param engine (of `random-js`) that is going to be used.
-   *        By default is `MersenneTwister19937.autoSeed()`.
    * @return [[NumericIndividual]] with the generated genotype.
    * @throws RangeError if `length` is not greater than `0`.
    * @throws Error if `range` is not valid.
    */
-  public generate(
-    length: number,
-    range: NumericRange = NumericRange.DEFAULT,
-    engine: Engine = MersenneTwister19937.autoSeed(),
-  ): I {
+  public generate(length: number, range: NumericRange = NumericRange.DEFAULT, engine = Generator.DEFAULT_ENGINE): I {
     const params = { length, range, engine };
     return this.generateWith(params);
   }
