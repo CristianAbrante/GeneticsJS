@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import IntegerIndividual from '../../../../../../../lib/individual/numeric/integer/IntegerIndividual';
+import { NumericRange } from '../../../../../../../lib/individual/numeric/base';
 import IntegerIndividualMock from '../IntegerIndividualMock';
 
 const I: IntegerIndividualMock = {
@@ -12,7 +12,7 @@ const I: IntegerIndividualMock = {
     representation: [4.889, -3.25, 8.95],
   },
   expectedGenotype: [5, -3, 9],
-  expectedRange: IntegerIndividual.DEFAULT_RANGE,
+  expectedRange: NumericRange.DEFAULT,
 };
 
 export default I;

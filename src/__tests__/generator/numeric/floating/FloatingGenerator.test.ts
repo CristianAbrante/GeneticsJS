@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import FloatingIndividualMock from '../../../resources/mocks/generator/numeric/floating/FloatingIndividualMock';
+import FloatingIndividualMock from '../../../resources/mocks/generator/numeric/floating/FloatingGeneratorMock';
 import BaseGeneratorTestSuite from '../../../resources/suites/generator/base/BaseGeneratorTestSuite';
 import NumericGeneratorTestSuite from '../../../resources/suites/generator/numeric/base/NumericGeneratorTestSuite';
 

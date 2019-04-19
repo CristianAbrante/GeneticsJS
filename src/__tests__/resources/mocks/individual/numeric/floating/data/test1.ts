@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
+import { NumericRange } from '../../../../../../../lib/individual/numeric/base';
 import FloatingIndividualMock from '../FloatingIndividualMock';
-import NumericIndividual from '../../../../../../../lib/individual/numeric/base/NumericIndividual';
 
 // 3.25 -2e3 4
 const I: FloatingIndividualMock = {
@@ -13,7 +13,7 @@ const I: FloatingIndividualMock = {
     representation: '3.25 -2e3 4',
   },
   expectedGenotype: [3.25, -2e3, 4],
-  expectedRange: NumericIndividual.DEFAULT_RANGE,
+  expectedRange: NumericRange.DEFAULT,
 };
 
 export default I;

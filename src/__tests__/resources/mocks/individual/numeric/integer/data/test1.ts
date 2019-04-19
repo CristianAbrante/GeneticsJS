@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
+import { NumericRange } from '../../../../../../../lib/individual/numeric/base';
 import { FloatingIndividual } from '../../../../../../../lib/individual/numeric/floating';
 import { IntegerIndividual } from '../../../../../../../lib/individual/numeric/integer';
 import IntegerIndividualMock from '../IntegerIndividualMock';
@@ -35,18 +36,8 @@ const I: IntegerIndividualMock = {
   },
   creationError: [
     {
-      range: {
-        highest: 7,
-        lowest: 5,
-      },
+      range: new NumericRange(5, 7),
       representation: [-1, 0, 3],
-    },
-    {
-      range: {
-        highest: 0,
-        lowest: 0,
-      },
-      representation: [5.25, 6, 7],
     },
   ],
   deepCopy: [
@@ -61,7 +52,7 @@ const I: IntegerIndividualMock = {
     },
   ],
   expectedGenotype: [2, -3, 4, 5],
-  expectedRange: IntegerIndividual.DEFAULT_RANGE,
+  expectedRange: NumericRange.DEFAULT,
 };
 
 export default I;

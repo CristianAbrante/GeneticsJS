@@ -6,15 +6,13 @@
 
 import { MersenneTwister19937 } from 'random-js';
 import { NumericParams } from '../../../../../../lib/generator/numeric/base/NumericGenerator';
+import { NumericRange } from '../../../../../../lib/individual/numeric/base';
 
 const integerMock: NumericParams[] = [
   {
     engine: MersenneTwister19937.autoSeed(),
     length: 10,
-    range: {
-      highest: 4.25,
-      lowest: 3.8,
-    },
+    range: new NumericRange(3.8, 4.25),
   },
 ];
 

@@ -38,7 +38,7 @@ abstract class NumericGenerator<I extends NumericIndividual> extends BaseGenerat
    */
   public generate(
     length: number,
-    range: NumericRange = NumericIndividual.DEFAULT_RANGE,
+    range: NumericRange = NumericRange.DEFAULT,
     engine: Engine = MersenneTwister19937.autoSeed(),
   ): I {
     const params = { length, range, engine };

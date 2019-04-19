@@ -51,7 +51,7 @@ class IntegerIndividual extends NumericIndividual {
    */
   public deepCopy(other: IntegerIndividual): void {
     this.setGenotype(Array.from(other.genotype));
-    this.setRange(new NumericRange(other.range.highest, other.range.lowest));
+    this.setRange(new NumericRange(other.range.lowest, other.range.highest));
   }
 
   /**

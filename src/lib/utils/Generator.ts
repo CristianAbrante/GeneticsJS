@@ -5,21 +5,7 @@
  */
 
 import { bool, Engine, integer, MersenneTwister19937, real } from 'random-js';
-import { NumericIndividual, NumericRange } from '../../individual/numeric/base';
-
-export const defaultEngine = MersenneTwister19937.autoSeed();
-
-export function generateProbability(engine: Engine) {
-  return real(0.0, 1.0, true)(engine);
-}
-
-export function generateIntegerInRange(range: NumericRange, engine: Engine = defaultEngine) {
-  return integer(range.lowest, range.highest)(engine);
-}
-
-export function generateFloatingInRange(range: NumericRange, engine: Engine = defaultEngine) {
-  return real(range.lowest, range.highest, true)(engine);
-}
+import { NumericIndividual } from '../individual/numeric/base';
 
 class Generator {
   public static DEFAULT_ENGINE = MersenneTwister19937.autoSeed();
@@ -34,16 +20,20 @@ class Generator {
     }
   }
 
-  public static generateProbability(engine = Generator.DEFAULT_ENGINE) {
-    return real(0.0, 1.0, true)(engine);
+  public static generateProbability(engine: Engine = Generator.DEFAULT_ENGINE) {
+    this.generateFloating({ lowest: 0.0, highest: 1.0 });
   }
 
-  public static generateBoolean(chance = 0.5, engine = Generator.DEFAULT_ENGINE) {
+  public static generateBoolean(chance = 0.5, engine: Engine = Generator.DEFAULT_ENGINE) {
     return bool(chance)(engine);
   }
 
-  public static generateInteger(range = NumericIndividual.DEFAULT_RANGE, engine = Generator.DEFAULT_ENGINE) {
+  public static generateInteger(range = NumericIndividual.DEFAULT_RANGE, engine: Engine = Generator.DEFAULT_ENGINE) {
     return integer(range.lowest, range.highest)(engine);
+  }
+
+  public static generateFloating(range = NumericIndividual.DEFAULT_RANGE, engine: Engine = Generator.DEFAULT_ENGINE) {
+    return real(range.lowest, range.highest, true)(engine);
   }
 }
 

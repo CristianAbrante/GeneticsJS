@@ -34,7 +34,7 @@ class FloatingIndividual extends NumericIndividual {
    * @throws Error if representation is an `string` with an
    *          wrong format.
    */
-  constructor(representation: number[] | string, range?: NumericRange) {
+  constructor(representation: number[] | string, range: NumericRange = NumericRange.DEFAULT) {
     if (typeof representation === 'string') {
       super([]);
       const reader = new FloatingReader();

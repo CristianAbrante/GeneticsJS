@@ -6,6 +6,7 @@
 
 import { integer } from 'random-js';
 import { NumericRange } from '../../../individual/numeric/base';
+import { IntegerNormalizer } from '../../../individual/numeric/integer/utils';
 import { NumericParams } from '../base/NumericGenerator';
 import { NumericIndividual } from './../../../individual/numeric/base';
 import { IntegerIndividual } from './../../../individual/numeric/integer';
@@ -28,16 +29,11 @@ class IntegerGenerator extends NumericGenerator<IntegerIndividual> {
   private static normalizeRange(range: NumericRange): NumericRange {
     const randomJSMax = 2 ** 53;
     const randomJSMin = -randomJSMax;
-    return {
-      highest:
-        range.highest === NumericIndividual.DEFAULT_RANGE.highest
-          ? randomJSMax
-          : IntegerIndividual.normalize(range.highest),
-      lowest:
-        range.lowest === NumericIndividual.DEFAULT_RANGE.lowest
-          ? randomJSMin
-          : IntegerIndividual.normalize(range.lowest),
-    };
+    const lowest =
+      range.lowest === NumericRange.DEFAULT.lowest ? randomJSMin : IntegerNormalizer.normalize(range.lowest);
+    const highest =
+      range.highest === NumericRange.DEFAULT.highest ? randomJSMax : IntegerNormalizer.normalize(range.highest);
+    return new NumericRange(lowest, highest);
   }
 
   /**

@@ -20,8 +20,8 @@ class NumericRange {
   }
 
   private static checkRangeValues(lowest: number, highest: number) {
-    if (this.rangeValuesAreValid(lowest, highest)) {
-      throw new Error(`Error: range [${lowest} - ${highest}] is not a valid range.`);
+    if (!this.rangeValuesAreValid(lowest, highest)) {
+      throw new Error(`Error: range [${lowest}, ${highest}] is not a valid range.`);
     }
   }
 
