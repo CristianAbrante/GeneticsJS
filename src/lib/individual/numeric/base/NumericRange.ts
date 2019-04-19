@@ -19,6 +19,14 @@ class NumericRange {
     return value >= range.lowest && value <= range.highest;
   }
 
+  public static normalizeValueToRange(value: number, range: NumericRange) {
+    if (!this.isValueInRange(value, range)) {
+      return value < range.lowest ? range.lowest : range.highest;
+    } else {
+      return value;
+    }
+  }
+
   private static checkRangeValues(lowest: number, highest: number) {
     if (!this.rangeValuesAreValid(lowest, highest)) {
       throw new Error(`Error: range [${lowest}, ${highest}] is not a valid range.`);

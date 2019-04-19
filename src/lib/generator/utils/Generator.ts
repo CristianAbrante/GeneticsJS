@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
+// @ts-ignore
+import Prob from 'prob.js';
 import { bool, Engine, integer, MersenneTwister19937, real } from 'random-js';
 import { NumericRange } from '../../individual/numeric/base';
 import { IntegerNormalizer } from '../../individual/numeric/integer/utils';
@@ -16,7 +18,7 @@ class Generator {
   }
 
   public static generateProbability(engine: Engine = Generator.DEFAULT_ENGINE) {
-    this.generateFloating(new NumericRange(0.0, 1.0));
+    return this.generateFloating(new NumericRange(0.0, 1.0));
   }
 
   public static generateBoolean(chance = 0.5, engine: Engine = Generator.DEFAULT_ENGINE) {
@@ -30,6 +32,23 @@ class Generator {
 
   public static generateFloating(range = NumericRange.DEFAULT, engine: Engine = Generator.DEFAULT_ENGINE) {
     return real(range.lowest, range.highest, true)(engine);
+  }
+
+  public static generateNormalDistributionValue(
+    mean: number = 0.0,
+    stdVar: number = 1.0,
+    engine: Engine = Generator.DEFAULT_ENGINE,
+  ): number {
+    const normal = Prob.normal(mean, stdVar);
+    return normal(engine);
+  }
+
+  public static generateNormalDistributionInteger(
+    mean: number = 0,
+    stdVar: number = 1,
+    engine: Engine = Generator.DEFAULT_ENGINE,
+  ): number {
+    return IntegerNormalizer.normalize(this.generateNormalDistributionValue(mean, stdVar, engine));
   }
 
   /**

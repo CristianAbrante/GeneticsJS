@@ -4,9 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import { Engine, MersenneTwister19937, real } from 'random-js';
+import { Generator } from '../../generator/utils';
 import { BinaryIndividual } from '../../individual/binary';
-import { checkProbability, generateProbability } from '../../utils';
 import { Mutation, MutationParams } from './../base';
 
 export interface BitwiseParams extends MutationParams {
@@ -14,11 +13,7 @@ export interface BitwiseParams extends MutationParams {
 }
 
 class BitwiseMutation implements Mutation<BinaryIndividual, boolean, BitwiseParams> {
-  public mutate(
-    individual: BinaryIndividual,
-    mutationRate: number = 0.5,
-    engine: Engine = MersenneTwister19937.autoSeed(),
-  ): void {
+  public mutate(individual: BinaryIndividual, mutationRate: number = 0.5, engine = Generator.DEFAULT_ENGINE): void {
     this.mutateWith(individual, {
       engine,
       mutationRate,
@@ -26,9 +21,8 @@ class BitwiseMutation implements Mutation<BinaryIndividual, boolean, BitwisePara
   }
 
   public mutateWith(individual: BinaryIndividual, params: BitwiseParams): void {
-    checkProbability(params.mutationRate);
     individual.forEach((_, index) => {
-      const threshold = generateProbability(params.engine);
+      const threshold = Generator.generateProbability(params.engine);
       if (threshold <= params.mutationRate) {
         individual.flip(index!);
       }
