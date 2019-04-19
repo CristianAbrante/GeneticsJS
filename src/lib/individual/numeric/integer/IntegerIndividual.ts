@@ -6,6 +6,7 @@
 
 import { NumericIndividual, NumericRange } from '../base';
 import { IntegerReader } from './../../../reader/numeric/integer';
+import { IntegerNormalizer } from './utils';
 
 /**
  * ## Integer individual
@@ -13,38 +14,6 @@ import { IntegerReader } from './../../../reader/numeric/integer';
  * where all the genes in the genotype are integers.
  */
 class IntegerIndividual extends NumericIndividual {
-  /**
-   * Normalize the given gene, rounding it.
-   * @param gene that we want to normalize.
-   */
-  public static normalize(gene: number): number {
-    return Math.round(gene);
-  }
-
-  /**
-   * Normalizes a complete numeric genotype.
-   * @param genotype that we want to normalize.
-   */
-  private static normalizeGenotype(genotype: number[]): number[] {
-    return genotype.map(gene => this.normalize(gene));
-  }
-
-  /**
-   * Normalizes a given numeric range.
-   * @param range that we want to normalize.
-   * @return the default range if it is `undefined`
-   *         and a normalized range otherwise.
-   */
-  private static normalizeNumericRange(range?: NumericRange): NumericRange {
-    if (range === undefined) {
-      return IntegerIndividual.DEFAULT_RANGE;
-    }
-    return {
-      highest: this.normalize(range.highest),
-      lowest: this.normalize(range.lowest),
-    };
-  }
-
   /**
    * Constructor of the class.
    * Takes the representation as
@@ -54,13 +23,13 @@ class IntegerIndividual extends NumericIndividual {
    * @param range of the individual, if not provided
    *        is the default range.
    */
-  constructor(representation: number[] | string, range?: NumericRange) {
+  constructor(representation: number[] | string, range = NumericRange.DEFAULT) {
     if (typeof representation === 'string') {
       super([]);
       const reader = new IntegerReader();
       this.copy(reader.read(representation));
     } else {
-      super(IntegerIndividual.normalizeGenotype(representation), IntegerIndividual.normalizeNumericRange(range));
+      super(IntegerNormalizer.normalizeGenotype(representation), IntegerNormalizer.normalizeRange(range));
     }
   }
 
@@ -82,10 +51,7 @@ class IntegerIndividual extends NumericIndividual {
    */
   public deepCopy(other: IntegerIndividual): void {
     this.setGenotype(Array.from(other.genotype));
-    this.setRange({
-      highest: other.range.highest,
-      lowest: other.range.lowest,
-    });
+    this.setRange(new NumericRange(other.range.highest, other.range.lowest));
   }
 
   /**
@@ -97,7 +63,7 @@ class IntegerIndividual extends NumericIndividual {
    * @throws RangeError if gene is not in range.
    */
   public fill(gene: number, start: number = 0, end: number = this.length()) {
-    super.fill(IntegerIndividual.normalize(gene), start, end);
+    super.fill(IntegerNormalizer.normalize(gene), start, end);
   }
 
   /**
@@ -111,7 +77,7 @@ class IntegerIndividual extends NumericIndividual {
    */
   public map(callback: (gene: number, geneIndex?: number, genotype?: number[]) => number) {
     const normalizedCallback = (gene: number, geneIndex?: number, genotype?: number[]) => {
-      return IntegerIndividual.normalize(callback(gene, geneIndex, genotype));
+      return IntegerNormalizer.normalize(callback(gene, geneIndex, genotype));
     };
     return super.map(normalizedCallback);
   }
@@ -125,7 +91,7 @@ class IntegerIndividual extends NumericIndividual {
    * @throws RangeError if gene is not in range.
    */
   public set(geneIndex: number, gene: number): void {
-    super.set(geneIndex, IntegerIndividual.normalize(gene));
+    super.set(geneIndex, IntegerNormalizer.normalize(gene));
   }
 }
 
