@@ -8,10 +8,10 @@ import { Generator } from '../../../generator/utils';
 import { FloatingIndividual } from '../../../individual/numeric/floating/';
 import { NumericNonUniformMutation, NumericNonUniformMutationParams } from '../base/';
 
-class NonuniformMutation extends NumericNonUniformMutation<FloatingIndividual> {
+class FloatingNonuniformMutation extends NumericNonUniformMutation<FloatingIndividual> {
   protected getDeltaValue(params: NumericNonUniformMutationParams): number {
     return Generator.generateNormalDistributionValue(0.0, params.stepSize, params.engine);
   }
 }
 
-export default NonuniformMutation;
+export default FloatingNonuniformMutation;
