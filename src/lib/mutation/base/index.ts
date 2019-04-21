@@ -5,3 +5,5 @@
  */
 
 export { MutationParams, default as Mutation } from './Mutation';
+export { default as MutationBase } from './MutationBase';
+export { UniformMutationParams, default as UniformMutation } from './UniformMutation';

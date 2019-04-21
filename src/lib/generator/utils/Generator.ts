@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
+// TODO: Better gaussian generator.
 const prob = require('prob.js');
 import { bool, Engine, integer, MersenneTwister19937, real } from 'random-js';
 import { NumericRange } from '../../individual/numeric/base';
@@ -17,10 +18,11 @@ class Generator {
   }
 
   public static generateProbability(engine: Engine = Generator.DEFAULT_ENGINE) {
-    return this.generateFloating(new NumericRange(0.0, 1.0));
+    return this.generateFloating(new NumericRange(0.0, 1.0), engine);
   }
 
   public static generateBoolean(chance = 0.5, engine: Engine = Generator.DEFAULT_ENGINE) {
+    this.checkProbability(chance);
     return bool(chance)(engine);
   }
 
@@ -67,6 +69,12 @@ class Generator {
     const highest =
       range.highest === NumericRange.DEFAULT.highest ? randomJSMax : IntegerNormalizer.normalize(range.highest);
     return new NumericRange(lowest, highest);
+  }
+
+  private static checkProbability(probability: number) {
+    if (!this.probabilityIsValid(probability)) {
+      throw new Error(`Error: probability ${probability} is not in range [0.0, 1.0].`);
+    }
   }
 }
 
