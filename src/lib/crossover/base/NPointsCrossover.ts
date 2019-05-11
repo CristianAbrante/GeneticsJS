@@ -6,78 +6,76 @@
 
 import { Generator } from '../../generator/utils';
 import MutableIndividual from '../../individual/base/MutableIndividual';
-import NumericRange from '../../individual/numeric/base/NumericRange';
-import Crossover, { CrossoverConstructor, CrossoverParams } from './Crossover';
+import { NumericRange } from '../../individual/numeric/base';
+import Crossover, { CrossoverParams, IndividualConstructor } from './Crossover';
 
-export interface NPointsCrossoverParams extends CrossoverParams {
+export interface NPointsCrossoverParams<I extends MutableIndividual<T>, T> extends CrossoverParams<I, T> {
   numberOfCrossoverPoints: number;
 }
 
-class NPointsCrossover<I extends MutableIndividual<T>, T, Constr extends CrossoverConstructor<I, T>>
-  implements Crossover<I, T, NPointsCrossoverParams> {
-  public static checkParents<I extends MutableIndividual<T>, T>(fistParent: I, secondParent: I) {
-    if (fistParent.length() !== secondParent.length()) {
-      throw new Error('Error: length of the parents is not equal.');
-    }
-  }
+class NPointsCrossover<I extends MutableIndividual<T>, T> implements Crossover<I, T, NPointsCrossoverParams<I, T>> {
+  private crossoverPointsRange: NumericRange = NumericRange.DEFAULT;
 
-  private static numberOfCrossoverPointsIsValid(numberOfPoints: number, parentsLength: number) {
-    if (numberOfPoints < 0 || numberOfPoints > parentsLength - 1) {
-      throw new RangeError('Error: number of points is not in range [0, length - 1].');
-    }
-  }
-
-  private static generateRandomCrossPoints(
-    numberOfCrossoverPoints: number,
-    parentsLength: number,
-    engine = Generator.DEFAULT_ENGINE,
-  ): number[] {
-    NPointsCrossover.numberOfCrossoverPointsIsValid(numberOfCrossoverPoints, parentsLength);
-    const crossoverPoints: number[] = [];
-    const range = new NumericRange(1, parentsLength - 1);
-    while (crossoverPoints.length !== numberOfCrossoverPoints) {
-      const crossoverPoint = Generator.generateInteger(range, engine);
-      if (!crossoverPoints.includes(crossoverPoint)) {
-        crossoverPoints.push(crossoverPoint);
-      }
-    }
-    return crossoverPoints.sort();
-  }
-
-  public cross(firstParent: I, secondParent: I, ...args: any[]): I[] {
-    return [];
-  }
-
-  public crossWith(
+  public cross(
     firstParent: I,
     secondParent: I,
-    params: NPointsCrossoverParams,
-    constr: CrossoverConstructor<I, T>,
+    numberOfCrossoverPoints: number,
+    individualConstructor: IndividualConstructor<I, T>,
+    engine = Generator.DEFAULT_ENGINE,
   ): I[] {
-    NPointsCrossover.checkParents(firstParent, secondParent);
-    const crossPoints = NPointsCrossover.generateRandomCrossPoints(
-      params.numberOfCrossoverPoints,
-      firstParent.length(),
-      params.engine,
-    );
-    const firstGenotype: T[] = [];
-    const secondGenotype: T[] = [];
+    return this.crossWith(firstParent, secondParent, {
+      engine,
+      individualConstructor,
+      numberOfCrossoverPoints,
+    });
+  }
+
+  public crossWith(firstParent: I, secondParent: I, params: NPointsCrossoverParams<I, T>): I[] {
+    this.checkParents(firstParent, secondParent);
+    this.setCrossoverPointsRange(firstParent.length());
+    this.checkCrossoverParams(params);
+
+    const crossPoints = this.generateCrossoverPoints(params);
+    const parents = [firstParent, secondParent];
+    const genotypes: T[][] = [[], []];
 
     let lastIndex = 0;
     crossPoints.forEach((crossPoint, index) => {
       while (lastIndex < crossPoint) {
-        if (index % 2 === 0) {
-          firstGenotype.push(firstParent.get(lastIndex));
-          secondGenotype.push(secondParent.get(lastIndex));
-        } else {
-          firstGenotype.push(secondParent.get(lastIndex));
-          secondGenotype.push(firstParent.get(lastIndex));
-        }
-        lastIndex += 1;
+        const parentSelectionCondition: boolean = index % 2 === 0;
+        genotypes[0].push(parents[parentSelectionCondition ? 0 : 1].get(lastIndex));
+        genotypes[1].push(parents[parentSelectionCondition ? 1 : 0].get(lastIndex));
       }
+      lastIndex += 1;
     });
+    return [new params.individualConstructor(genotypes[0]), new params.individualConstructor(genotypes[1])];
+  }
 
-    return [new constr(firstGenotype), new constr(secondGenotype)];
+  private setCrossoverPointsRange(parentsLength: number) {
+    this.crossoverPointsRange = new NumericRange(0, parentsLength - 1);
+  }
+
+  private checkParents(firstParent: I, secondParent: I) {
+    if (firstParent.length() !== secondParent.length()) {
+      throw new Error('NPointsCrossover: both parents must have the same length.');
+    }
+  }
+
+  private checkCrossoverParams(params: NPointsCrossoverParams<I, T>) {
+    if (NumericRange.isValueInRange(params.numberOfCrossoverPoints, this.crossoverPointsRange)) {
+      throw new Error('NPointsCrossover: number of crossover points must be in range [0, length - 1]');
+    }
+  }
+
+  private generateCrossoverPoints(params: NPointsCrossoverParams<I, T>): number[] {
+    const crossoverPoints: number[] = [];
+    while (crossoverPoints.length !== params.numberOfCrossoverPoints) {
+      const point = Generator.generateInteger(this.crossoverPointsRange, params.engine);
+      if (!crossoverPoints.includes(point)) {
+        crossoverPoints.push(point);
+      }
+    }
+    return crossoverPoints.sort();
   }
 }
 

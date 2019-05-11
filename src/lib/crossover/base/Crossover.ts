@@ -7,15 +7,16 @@
 import { Engine } from 'random-js';
 import BaseIndividual from '../../individual/base/BaseIndividual';
 
-export interface CrossoverParams {
+export type IndividualConstructor<I extends BaseIndividual<T>, T> = new (...args: any[]) => I;
+
+export interface CrossoverParams<I extends BaseIndividual<T>, T> {
   engine: Engine;
+  individualConstructor: IndividualConstructor<I, T>;
 }
 
-export type CrossoverConstructor<I extends BaseIndividual<T>, T> = new (...args: any[]) => I;
-
-interface Crossover<I extends BaseIndividual<T>, T, Params extends CrossoverParams> {
+interface Crossover<I extends BaseIndividual<T>, T, Params extends CrossoverParams<I, T>> {
   cross(firstParent: I, secondParent: I, ...args: any[]): I[];
-  crossWith(firstParent: I, secondParent: I, params: Params, constr: CrossoverConstructor<I, T>): I[];
+  crossWith(firstParent: I, secondParent: I, params: Params): I | I[];
 }
 
 export default Crossover;
