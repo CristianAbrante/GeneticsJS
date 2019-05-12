@@ -15,8 +15,8 @@ export interface CrossoverParams<I extends BaseIndividual<T>, T> {
 }
 
 interface Crossover<I extends BaseIndividual<T>, T, Params extends CrossoverParams<I, T>> {
-  cross(firstParent: I, secondParent: I, ...args: any[]): I | I[];
-  crossWith(firstParent: I, secondParent: I, params: Params): I | I[];
+  cross(firstParent: I, secondParent: I, ...args: any[]): I[];
+  crossWith(firstParent: I, secondParent: I, params: Params): I[];
 }
 
 export default Crossover;

@@ -9,14 +9,14 @@ import Crossover, { CrossoverParams } from './Crossover';
 
 abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends CrossoverParams<I, T>>
   implements Crossover<I, T, Params> {
-  public abstract cross(firstParent: I, secondParent: I, ...args: any[]): I | I[];
+  public abstract cross(firstParent: I, secondParent: I, ...args: any[]): I[];
 
-  public crossWith(firstParent: I, secondParent: I, params: CrossoverParams<I, T>): I | I[] {
+  public crossWith(firstParent: I, secondParent: I, params: Params): I[] {
     this.checkParents(firstParent, secondParent);
     const parentsLength = firstParent.length();
     const genotypes: T[][] = [[], []];
     for (let i = 0; i < parentsLength; i++) {
-      const result = this.getGenotypeValues(firstParent, secondParent, i);
+      const result = this.getGenotypeValues(firstParent, secondParent, params, i);
       genotypes[0].push(result.firstGenotypeValue);
       genotypes[1].push(result.secondGenotypeValue);
     }
@@ -26,6 +26,7 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
   protected abstract getGenotypeValues(
     firstParent: I,
     secondParent: I,
+    params: Params,
     index: number,
   ): { firstGenotypeValue: T; secondGenotypeValue: T };
 
@@ -39,3 +40,5 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
     }
   }
 }
+
+export default BaseCrossover;
