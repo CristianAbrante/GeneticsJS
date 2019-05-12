@@ -47,15 +47,15 @@ class NPointsCrossover<I extends BaseIndividual<T>, T> extends BaseCrossover<I, 
     secondParent: I,
     params: NPointsCrossoverParams<I, T>,
     index: number,
-  ): { firstGenotypeValue: T; secondGenotypeValue: T } {
+  ): { first: T; second: T } {
     const crossPoint = this.crossoverPoints[this.crossoverPointIndex];
     if (index >= crossPoint && this.crossoverPointIndex < this.crossoverPoints.length) {
       this.crossoverPointIndex += 1;
     }
     const parentSelectionCondition: boolean = this.crossoverPointIndex % 2 === 0;
     return {
-      firstGenotypeValue: parentSelectionCondition ? firstParent.get(index) : secondParent.get(index),
-      secondGenotypeValue: parentSelectionCondition ? secondParent.get(index) : firstParent.get(index),
+      first: parentSelectionCondition ? firstParent.get(index) : secondParent.get(index),
+      second: parentSelectionCondition ? secondParent.get(index) : firstParent.get(index),
     };
   }
 

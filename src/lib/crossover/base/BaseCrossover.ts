@@ -17,8 +17,8 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
     const genotypes: T[][] = [[], []];
     for (let i = 0; i < parentsLength; i++) {
       const result = this.getGenotypeValues(firstParent, secondParent, params, i);
-      genotypes[0].push(result.firstGenotypeValue);
-      genotypes[1].push(result.secondGenotypeValue);
+      genotypes[0].push(result.first);
+      genotypes[1].push(result.second);
     }
     return [new params.individualConstructor(genotypes[0]), new params.individualConstructor(genotypes[1])];
   }
@@ -28,7 +28,7 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
     secondParent: I,
     params: Params,
     index: number,
-  ): { firstGenotypeValue: T; secondGenotypeValue: T };
+  ): { first: T; second: T };
 
   protected parentsAreValid(firstParent: I, secondParent: I): boolean {
     return firstParent.length() === secondParent.length();
