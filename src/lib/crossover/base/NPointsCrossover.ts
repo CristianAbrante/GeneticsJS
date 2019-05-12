@@ -7,14 +7,17 @@
 import { Generator } from '../../generator/utils';
 import { BaseIndividual } from '../../individual/base';
 import { NumericRange } from '../../individual/numeric/base';
+import BaseCrossover from './BaseCrossover';
 import Crossover, { CrossoverParams, IndividualConstructor } from './Crossover';
 
 export interface NPointsCrossoverParams<I extends BaseIndividual<T>, T> extends CrossoverParams<I, T> {
   numberOfCrossoverPoints: number;
 }
 
-class NPointsCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T, NPointsCrossoverParams<I, T>> {
+class NPointsCrossover<I extends BaseIndividual<T>, T> extends BaseCrossover<I, T, NPointsCrossoverParams<I, T>> {
   private crossoverPointsRange: NumericRange = NumericRange.DEFAULT;
+  private crossoverPoints: number[] = [];
+  private crossoverPointIndex = 0;
 
   public cross(
     firstParent: I,
@@ -32,33 +35,32 @@ class NPointsCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T
 
   public crossWith(firstParent: I, secondParent: I, params: NPointsCrossoverParams<I, T>): I[] {
     const parentsLength = firstParent.length();
-    this.checkParents(firstParent, secondParent);
     this.setCrossoverPointsRange(parentsLength);
     this.checkCrossoverParams(params);
-    const crossPoints = this.generateCrossoverPoints(params);
-    const parents = [firstParent, secondParent];
-    const genotypes: T[][] = [[], []];
-    let crossoverIndex = 0;
-    for (let i = 0; i < parentsLength; i++) {
-      const crossPoint = crossPoints[crossoverIndex];
-      if (i >= crossPoint && crossoverIndex < crossPoints.length) {
-        crossoverIndex += 1;
-      }
-      const parentSelectionCondition: boolean = crossoverIndex % 2 === 0;
-      genotypes[0].push(parents[parentSelectionCondition ? 0 : 1].get(i));
-      genotypes[1].push(parents[parentSelectionCondition ? 1 : 0].get(i));
+    this.generateCrossoverPoints(params);
+    this.crossoverPointIndex = 0;
+    return super.crossWith(firstParent, secondParent, params);
+  }
+
+  protected getGenotypeValues(
+    firstParent: I,
+    secondParent: I,
+    params: NPointsCrossoverParams<I, T>,
+    index: number,
+  ): { firstGenotypeValue: T; secondGenotypeValue: T } {
+    const crossPoint = this.crossoverPoints[this.crossoverPointIndex];
+    if (index >= crossPoint && this.crossoverPointIndex < this.crossoverPoints.length) {
+      this.crossoverPointIndex += 1;
     }
-    return [new params.individualConstructor(genotypes[0]), new params.individualConstructor(genotypes[1])];
+    const parentSelectionCondition: boolean = this.crossoverPointIndex % 2 === 0;
+    return {
+      firstGenotypeValue: parentSelectionCondition ? firstParent.get(index) : secondParent.get(index),
+      secondGenotypeValue: parentSelectionCondition ? secondParent.get(index) : firstParent.get(index),
+    };
   }
 
   private setCrossoverPointsRange(parentsLength: number) {
     this.crossoverPointsRange = new NumericRange(0, parentsLength - 1);
-  }
-
-  private checkParents(firstParent: I, secondParent: I) {
-    if (firstParent.length() !== secondParent.length()) {
-      throw new Error('NPointsCrossover: both parents must have the same length.');
-    }
   }
 
   private checkCrossoverParams(params: NPointsCrossoverParams<I, T>) {
@@ -71,15 +73,14 @@ class NPointsCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T
     }
   }
 
-  private generateCrossoverPoints(params: NPointsCrossoverParams<I, T>): number[] {
-    const crossoverPoints: number[] = [];
-    while (crossoverPoints.length !== params.numberOfCrossoverPoints) {
+  private generateCrossoverPoints(params: NPointsCrossoverParams<I, T>) {
+    while (this.crossoverPoints.length !== params.numberOfCrossoverPoints) {
       const point = Generator.generateInteger(this.crossoverPointsRange, params.engine);
-      if (!crossoverPoints.includes(point)) {
-        crossoverPoints.push(point);
+      if (!this.crossoverPoints.includes(point)) {
+        this.crossoverPoints.push(point);
       }
     }
-    return crossoverPoints.sort();
+    this.crossoverPoints.sort();
   }
 }
 
