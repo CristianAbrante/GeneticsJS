@@ -31,23 +31,23 @@ class NPointsCrossover<I extends MutableIndividual<T>, T> implements Crossover<I
   }
 
   public crossWith(firstParent: I, secondParent: I, params: NPointsCrossoverParams<I, T>): I[] {
+    const parentsLength = firstParent.length();
     this.checkParents(firstParent, secondParent);
-    this.setCrossoverPointsRange(firstParent.length());
+    this.setCrossoverPointsRange(parentsLength);
     this.checkCrossoverParams(params);
-
     const crossPoints = this.generateCrossoverPoints(params);
     const parents = [firstParent, secondParent];
     const genotypes: T[][] = [[], []];
-
-    let lastIndex = 0;
-    crossPoints.forEach((crossPoint, index) => {
-      while (lastIndex < crossPoint) {
-        const parentSelectionCondition: boolean = index % 2 === 0;
-        genotypes[0].push(parents[parentSelectionCondition ? 0 : 1].get(lastIndex));
-        genotypes[1].push(parents[parentSelectionCondition ? 1 : 0].get(lastIndex));
+    let crossoverIndex = 0;
+    for (let i = 0; i < parentsLength; i++) {
+      const crossPoint = crossPoints[crossoverIndex];
+      if (i >= crossPoint && crossoverIndex < crossPoints.length) {
+        crossoverIndex += 1;
       }
-      lastIndex += 1;
-    });
+      const parentSelectionCondition: boolean = crossoverIndex % 2 === 0;
+      genotypes[0].push(parents[parentSelectionCondition ? 0 : 1].get(i));
+      genotypes[1].push(parents[parentSelectionCondition ? 1 : 0].get(i));
+    }
     return [new params.individualConstructor(genotypes[0]), new params.individualConstructor(genotypes[1])];
   }
 
@@ -62,8 +62,12 @@ class NPointsCrossover<I extends MutableIndividual<T>, T> implements Crossover<I
   }
 
   private checkCrossoverParams(params: NPointsCrossoverParams<I, T>) {
-    if (NumericRange.isValueInRange(params.numberOfCrossoverPoints, this.crossoverPointsRange)) {
-      throw new Error('NPointsCrossover: number of crossover points must be in range [0, length - 1]');
+    if (!NumericRange.isValueInRange(params.numberOfCrossoverPoints, this.crossoverPointsRange)) {
+      throw new Error(
+        `NPointsCrossover: number of crossover points must be in range [${this.crossoverPointsRange.lowest}, ${
+          this.crossoverPointsRange.highest
+        }]`,
+      );
     }
   }
 
