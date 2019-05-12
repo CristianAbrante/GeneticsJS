@@ -5,19 +5,24 @@
  */
 
 import NPointsCrossover from '../../lib/crossover/base/NPointsCrossover';
-import { Generator } from '../../lib/generator/utils';
 import BinaryIndividual from '../../lib/individual/binary/BinaryIndividual';
 
-const ind1 = new BinaryIndividual([true, false, false, true]);
-const ind2 = new BinaryIndividual([true, true, false, true]);
+import { Generator } from '../../lib/generator/utils/';
 
-const cross = new NPointsCrossover();
+jest.mock('../../lib/generator/utils/');
 
-const result = cross.crossWith(
-  ind1,
-  ind2,
-  { numberOfCrossoverPoints: 3, engine: Generator.DEFAULT_ENGINE },
-  BinaryIndividual,
-);
+const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
 
-console.log(result);
+test('Generator fetch', () => {
+  [1, 3].forEach(point => {
+    mockedGenerator.generateInteger.mockReturnValueOnce(point);
+  });
+
+  const ind1 = new BinaryIndividual([true, false, false, false, true]);
+  const ind2 = new BinaryIndividual([true, true, false, true, false]);
+  const cross = new NPointsCrossover<BinaryIndividual, boolean>();
+
+  const result = cross.cross(ind1, ind2, 2, BinaryIndividual);
+  expect(result[0]).toEqual(new BinaryIndividual([true, true, false, false, true]));
+  expect(result[1]).toEqual(new BinaryIndividual([true, false, false, true, false]));
+});
