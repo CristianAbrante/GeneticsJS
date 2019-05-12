@@ -6,38 +6,41 @@
 
 import { Generator } from '../../generator/utils';
 import { BaseIndividual } from '../../individual/base';
-import Crossover, { CrossoverParams } from './Crossover';
+import BaseCrossover from './BaseCrossover';
+import Crossover, { CrossoverParams, IndividualConstructor } from './Crossover';
 
 export interface UniformCrossoverParams<I extends BaseIndividual<T>, T> extends CrossoverParams<I, T> {
   selectionThreshold: number;
 }
 
-class UniformCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T, UniformCrossoverParams<I, T>> {
-  public cross(firstParent: I, secondParent: I, ...args: any[]): I[] {
-    return [];
+class UniformCrossover<I extends BaseIndividual<T>, T> extends BaseCrossover<I, T, UniformCrossoverParams<I, T>> {
+  public cross(
+    firstParent: I,
+    secondParent: I,
+    individualConstructor: IndividualConstructor<I, T>,
+    selectionThreshold = 0.5,
+    engine = Generator.DEFAULT_ENGINE,
+  ): I[] {
+    return this.crossWith(firstParent, secondParent, { individualConstructor, selectionThreshold, engine });
   }
 
-  public crossWith(firstParent: I, secondParent: I, params: UniformCrossoverParams<I, T>): I[] | I {
-    this.checkParents(firstParent, secondParent);
+  public crossWith(firstParent: I, secondParent: I, params: UniformCrossoverParams<I, T>): I[] {
     this.checkParams(params);
-
-    const parentsLength = firstParent.length();
-    const parents = [firstParent, secondParent];
-    const genotypes: T[][] = [[], []];
-
-    for (let i = 0; i < parentsLength; i++) {
-      const value = Generator.generateProbability(params.engine);
-      const parentSelectionCondition = value <= params.selectionThreshold;
-      genotypes[0].push(parents[parentSelectionCondition ? 0 : 1].get(i));
-      genotypes[0].push(parents[parentSelectionCondition ? 1 : 0].get(i));
-    }
-    return [new params.individualConstructor(genotypes[0]), new params.individualConstructor(genotypes[1])];
+    return super.crossWith(firstParent, secondParent, params);
   }
 
-  private checkParents(firstParent: I, secondParent: I) {
-    if (firstParent.length() !== secondParent.length()) {
-      throw new Error('NPointsCrossover: both parents must have the same length.');
-    }
+  protected getGenotypeValues(
+    firstParent: I,
+    secondParent: I,
+    params: UniformCrossoverParams<I, T>,
+    index: number,
+  ): { first: T; second: T } {
+    const value = Generator.generateProbability(params.engine);
+    const parentSelectionCondition = value <= params.selectionThreshold;
+    return {
+      first: parentSelectionCondition ? firstParent.get(index) : secondParent.get(index),
+      second: parentSelectionCondition ? secondParent.get(index) : firstParent.get(index),
+    };
   }
 
   private checkParams(params: UniformCrossoverParams<I, T>) {
@@ -46,3 +49,5 @@ class UniformCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T
     }
   }
 }
+
+export default UniformCrossover;
