@@ -5,15 +5,15 @@
  */
 
 import { Generator } from '../../generator/utils';
-import MutableIndividual from '../../individual/base/MutableIndividual';
+import { BaseIndividual } from '../../individual/base';
 import { NumericRange } from '../../individual/numeric/base';
 import Crossover, { CrossoverParams, IndividualConstructor } from './Crossover';
 
-export interface NPointsCrossoverParams<I extends MutableIndividual<T>, T> extends CrossoverParams<I, T> {
+export interface NPointsCrossoverParams<I extends BaseIndividual<T>, T> extends CrossoverParams<I, T> {
   numberOfCrossoverPoints: number;
 }
 
-class NPointsCrossover<I extends MutableIndividual<T>, T> implements Crossover<I, T, NPointsCrossoverParams<I, T>> {
+class NPointsCrossover<I extends BaseIndividual<T>, T> implements Crossover<I, T, NPointsCrossoverParams<I, T>> {
   private crossoverPointsRange: NumericRange = NumericRange.DEFAULT;
 
   public cross(
