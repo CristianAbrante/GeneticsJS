@@ -7,7 +7,7 @@
 import { Engine } from 'random-js';
 import BaseIndividual from '../../individual/base/BaseIndividual';
 
-export type IndividualConstructor<I extends BaseIndividual<T>, T> = new (...args: any[]) => I;
+export type IndividualConstructor<I extends BaseIndividual<T>, T> = new (genotype: T[]) => I;
 
 export interface CrossoverParams<I extends BaseIndividual<T>, T> {
   engine: Engine;
