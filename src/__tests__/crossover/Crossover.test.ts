@@ -5,24 +5,46 @@
  */
 
 import NPointsCrossover from '../../lib/crossover/base/NPointsCrossover';
+import { MutableIndividual } from '../../lib/individual/base';
 import BinaryIndividual from '../../lib/individual/binary/BinaryIndividual';
 
 import { Generator } from '../../lib/generator/utils/';
-
 jest.mock('../../lib/generator/utils/');
 
-const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
+// test mocks import
+import BinaryMock from '../resources/mocks/crossover/binary/NPointsCrossoverMockBinary';
+import NPointsCrossoverMock from '../resources/mocks/crossover/NPointsCrossoverMock';
 
-test('Generator fetch', () => {
-  [1, 3].forEach(point => {
-    mockedGenerator.generateInteger.mockReturnValueOnce(point);
+const nPointsTestSuite = <I extends MutableIndividual<T>, T>(
+  mock: Array<NPointsCrossoverMock<I, T>>,
+  message: string,
+  cross: NPointsCrossover<I, T>,
+) => {
+  describe(message, () => {
+    mock.forEach(mockTest => {
+      test(`N points crossover with => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
+        const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
+        mockTest.crossoverPoints.forEach(point => {
+          mockedGenerator.generateInteger.mockReturnValueOnce(point);
+        });
+        const result = cross.cross(
+          mockTest.firstParent,
+          mockTest.secondParent,
+          mockTest.params.numberOfCrossoverPoints,
+          mockTest.params.individualConstructor,
+          mockTest.params.engine,
+        );
+        expect(result[0]).toEqual(mockTest.offspring[0]);
+        expect(result[1]).toEqual(mockTest.offspring[1]);
+      });
+    });
   });
+};
 
-  const ind1 = new BinaryIndividual([true, false, false, false, true]);
-  const ind2 = new BinaryIndividual([true, true, false, true, false]);
-  const cross = new NPointsCrossover<BinaryIndividual, boolean>();
-
-  const result = cross.cross(ind1, ind2, 2, BinaryIndividual);
-  expect(result[0]).toEqual(new BinaryIndividual([true, true, false, false, true]));
-  expect(result[1]).toEqual(new BinaryIndividual([true, false, false, true, false]));
+describe('N Points crossover tests', () => {
+  nPointsTestSuite<BinaryIndividual, boolean>(
+    BinaryMock,
+    'Binary Individual',
+    new NPointsCrossover<BinaryIndividual, boolean>(),
+  );
 });
