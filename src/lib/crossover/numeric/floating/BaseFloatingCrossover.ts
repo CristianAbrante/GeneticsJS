@@ -15,7 +15,8 @@ export interface BaseFloatingCrossoverParams extends CrossoverParams<FloatingInd
 }
 
 abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, number, BaseFloatingCrossoverParams> {
-  private recombinationPoint: number = 0;
+  protected recombinationPoint: number = 0;
+
   public cross(
     firstParent: FloatingIndividual,
     secondParent: FloatingIndividual,
@@ -71,3 +72,5 @@ abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, n
     this.recombinationPoint = Generator.generateInteger(new NumericRange(0, parentsLength - 1), params.engine);
   }
 }
+
+export default BaseFloatingCrossover;
