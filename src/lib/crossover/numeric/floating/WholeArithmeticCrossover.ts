@@ -10,7 +10,7 @@ export { BaseFloatingCrossoverParams as WholeArithmeticCrossoverParams } from '.
 
 class WholeArithmeticCrossover extends BaseFloatingCrossover {
   protected getRecombinationCondition(index: number): boolean {
-    return false;
+    return true;
   }
 }
 

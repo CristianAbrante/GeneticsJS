@@ -10,7 +10,7 @@ export { BaseFloatingCrossoverParams as SingleArithmeticRecombinationParams } fr
 
 class SingleArithmeticRecombination extends BaseFloatingCrossover {
   protected getRecombinationCondition(index: number): boolean {
-    return index !== this.recombinationPoint;
+    return index === this.recombinationPoint;
   }
 }
 

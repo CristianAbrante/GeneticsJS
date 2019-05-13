@@ -46,8 +46,8 @@ abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, n
     const firstValue = firstParent.get(index);
     const secondValue = secondParent.get(index);
     return {
-      first: recombinationCondition ? firstValue : this.getRecombinationValue(firstValue, secondValue, params),
-      second: recombinationCondition ? secondValue : this.getRecombinationValue(secondValue, firstValue, params),
+      first: recombinationCondition ? this.getRecombinationValue(firstValue, secondValue, params) : firstValue,
+      second: recombinationCondition ? this.getRecombinationValue(secondValue, firstValue, params) : secondValue,
     };
   }
 
