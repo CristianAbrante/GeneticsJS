@@ -6,7 +6,7 @@
 
 import BaseFloatingCrossover, { BaseFloatingCrossoverParams } from './BaseFloatingCrossover';
 
-export interface SimpleArithmeticRecombinationParams extends BaseFloatingCrossoverParams {}
+export { BaseFloatingCrossoverParams as SimpleArithmeticRecombinationParams } from './BaseFloatingCrossover';
 
 class SimpleArithmeticRecombination extends BaseFloatingCrossover {
   protected getRecombinationCondition(index: number): boolean {
