@@ -8,8 +8,7 @@ import BinaryGeneratorMock from '../../resources/mocks/generator/binary/BinaryGe
 import BaseGeneratorSuite from '../../resources/suites/generator/base/BaseGeneratorTestSuite';
 import BinaryGeneratorSuite from '../../resources/suites/generator/binary/BinaryGeneratorTestSuite';
 
-import Genetics from '../../../index';
-const { BinaryGenerator } = Genetics.generator;
+import { BinaryGenerator } from '../../../index';
 
 BinaryGeneratorMock.forEach(testParams => {
   describe(`Tests with params: ${testParams.length} - ${testParams.chance}`, () => {

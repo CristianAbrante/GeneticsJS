@@ -7,8 +7,7 @@
 import BinaryReaderData from '../../resources/mocks/reader/data/BinaryReaderData';
 import ReaderTestSuite from '../../resources/suites/reader/ReaderTestSuite';
 
-import Genetics from '../../../index';
-const { BinaryReader } = Genetics.reader;
+import { BinaryReader } from '../../../index';
 
 const reader = new BinaryReader();
 ReaderTestSuite(reader, BinaryReaderData);
