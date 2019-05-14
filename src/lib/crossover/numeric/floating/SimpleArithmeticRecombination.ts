@@ -6,12 +6,11 @@
 
 import BaseFloatingCrossover, { BaseFloatingCrossoverParams } from './BaseFloatingCrossover';
 
-export { BaseFloatingCrossoverParams as SimpleArithmeticRecombinationParams } from './BaseFloatingCrossover';
-
 class SimpleArithmeticRecombination extends BaseFloatingCrossover {
   protected getRecombinationCondition(index: number): boolean {
     return index >= this.recombinationPoint;
   }
 }
 
+export { BaseFloatingCrossoverParams as SimpleArithmeticRecombinationParams };
 export default SimpleArithmeticRecombination;

@@ -4,9 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import BaseFloatingCrossover from './BaseFloatingCrossover';
-
-export { BaseFloatingCrossoverParams as WholeArithmeticCrossoverParams } from './BaseFloatingCrossover';
+import BaseFloatingCrossover, { BaseFloatingCrossoverParams } from './BaseFloatingCrossover';
 
 class WholeArithmeticCrossover extends BaseFloatingCrossover {
   protected getRecombinationCondition(index: number): boolean {
@@ -14,4 +12,5 @@ class WholeArithmeticCrossover extends BaseFloatingCrossover {
   }
 }
 
+export { BaseFloatingCrossoverParams as WholeArithmeticCrossoverParams };
 export default WholeArithmeticCrossover;
