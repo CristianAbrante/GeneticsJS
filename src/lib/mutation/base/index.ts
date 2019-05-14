@@ -4,6 +4,6 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-export { MutationParams, default as Mutation } from './Mutation';
-export { default as MutationBase } from './MutationBase';
-export { UniformMutationParams, default as UniformMutation } from './UniformMutation';
+export { default as Mutation, MutationParams } from './Mutation';
+export { default as MutationBase, MutationBaseParams } from './MutationBase';
+export { default as UniformMutation, UniformMutationParams } from './UniformMutation';
