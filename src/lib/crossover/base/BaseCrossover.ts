@@ -31,7 +31,7 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Base
   ): { first: T; second: T };
 
   protected parentsAreValid(firstParent: I, secondParent: I): boolean {
-    return firstParent.length() === secondParent.length();
+    return firstParent.length() === secondParent.length() && firstParent.length() > 1;
   }
 
   protected checkParents(firstParent: I, secondParent: I) {
