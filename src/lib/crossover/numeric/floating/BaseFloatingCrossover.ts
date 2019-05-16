@@ -7,8 +7,7 @@
 import { Generator } from '../../../generator/utils';
 import { NumericRange } from '../../../individual/numeric/base';
 import { FloatingIndividual } from '../../../individual/numeric/floating';
-import BaseCrossover from '../../base/BaseCrossover';
-import { CrossoverParams, IndividualConstructor } from '../../base/Crossover';
+import { BaseCrossover, CrossoverParams } from '../../base';
 
 export interface BaseFloatingCrossoverParams extends CrossoverParams<FloatingIndividual, number> {
   alpha: number;
