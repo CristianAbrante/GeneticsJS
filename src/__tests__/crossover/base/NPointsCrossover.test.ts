@@ -4,25 +4,24 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import NPointsCrossover from '../../lib/crossover/base/NPointsCrossover';
-import { MutableIndividual } from '../../lib/individual/base';
-import BinaryIndividual from '../../lib/individual/binary/BinaryIndividual';
+import { BaseIndividual, BinaryIndividual, NPointsCrossover } from '../../../index';
+import { Generator } from '../../../lib/generator/utils';
+import NPointsCrossoverMock from '../../resources/mocks/crossover/base/n-points/NPointsCrossoverMock';
 
-import { Generator } from '../../lib/generator/utils/';
-jest.mock('../../lib/generator/utils/');
+// mocks
+jest.mock('../../../lib/generator/utils/');
 
-// test mocks import
-import BinaryMock from '../resources/mocks/crossover/binary/NPointsCrossoverMockBinary';
-import NPointsCrossoverMock from '../resources/mocks/crossover/NPointsCrossoverMock';
+// test suites import
+import { Binary } from '../../resources/mocks/crossover/base/n-points/data';
 
-const nPointsTestSuite = <I extends MutableIndividual<T>, T>(
+const nPointsTestSuite = <I extends BaseIndividual<T>, T>(
   mock: Array<NPointsCrossoverMock<I, T>>,
   message: string,
   cross: NPointsCrossover<I, T>,
 ) => {
   describe(message, () => {
     mock.forEach(mockTest => {
-      test(`N points crossover with => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
+      test(`Individuals => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
         const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
         mockTest.crossoverPoints.forEach(point => {
           mockedGenerator.generateInteger.mockReturnValueOnce(point);
@@ -42,9 +41,5 @@ const nPointsTestSuite = <I extends MutableIndividual<T>, T>(
 };
 
 describe('N Points crossover tests', () => {
-  nPointsTestSuite<BinaryIndividual, boolean>(
-    BinaryMock,
-    'Binary Individual',
-    new NPointsCrossover<BinaryIndividual, boolean>(),
-  );
+  nPointsTestSuite(Binary, 'With binary individual', new NPointsCrossover<BinaryIndividual, boolean>());
 });
