@@ -45,7 +45,9 @@ class UniformCrossover<I extends BaseIndividual<T>, T> extends BaseCrossover<I, 
 
   private checkParams(params: UniformCrossoverParams<I, T>) {
     if (!Generator.probabilityIsValid(params.selectionThreshold)) {
-      throw new Error('Uniform Crossover: selection threshold should be in range [0.0, 1.0]');
+      throw new Error(
+        `Uniform Crossover: selection threshold ${params.selectionThreshold} should be in range [0.0, 1.0]`,
+      );
     }
   }
 }
