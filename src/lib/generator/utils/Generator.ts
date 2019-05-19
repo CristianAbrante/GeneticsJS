@@ -5,8 +5,8 @@
  */
 
 // TODO: Better gaussian generator.
-const prob = require('prob.js');
 import { bool, Engine, integer, MersenneTwister19937, real } from 'random-js';
+import { Gaussian } from 'ts-gaussian';
 import { NumericRange } from '../../individual/numeric/base';
 import { IntegerNormalizer } from '../../individual/numeric/integer/utils';
 
@@ -40,8 +40,8 @@ class Generator {
     stdVar: number = 1.0,
     engine: Engine = Generator.DEFAULT_ENGINE,
   ): number {
-    const normal = prob.normal(mean, stdVar);
-    return normal();
+    const dist = new Gaussian(mean, stdVar);
+    return dist.ppf(this.generateProbability(engine));
   }
 
   public static generateNormalDistributionInteger(
