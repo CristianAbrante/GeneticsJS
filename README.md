@@ -14,7 +14,7 @@
         <img alt="CircleCI branch" src="https://img.shields.io/circleci/project/github/CristianAbrante/GeneticsJS/master.svg">
     </a>
     <a href="https://coveralls.io/github/CristianAbrante/GeneticsJS">
-        <img alt="Coveralls github" src="https://img.shields.io/coveralls/github/CristianAbrante/GeneticsJS.svg">
+        <img src='https://coveralls.io/repos/github/CristianAbrante/GeneticsJS/badge.svg?branch=master' alt='Coverage Status' />
     </a>
     <a href="https://github.com/ellerbrock/open-source-badges/">
         <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103g" alt="Open source">
