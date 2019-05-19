@@ -26,9 +26,7 @@ const floatingCrossoverTestSuite = <X extends BaseFloatingCrossover>(
     mock.forEach(mockTest => {
       test(`Individuals => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
         const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
-        // @ts-ignore
         mockedGenerator.probabilityIsValid.mockReturnValue(true);
-        // @ts-ignore
         mockedGenerator.generateInteger.mockReturnValueOnce(mockTest.recombinationPoint);
         const result = cross.cross(
           mockTest.firstParent,
