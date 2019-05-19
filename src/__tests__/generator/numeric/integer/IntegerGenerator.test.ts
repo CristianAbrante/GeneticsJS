@@ -8,8 +8,7 @@ import FloatingIndividualMock from '../../../resources/mocks/generator/numeric/f
 import BaseGeneratorTestSuite from '../../../resources/suites/generator/base/BaseGeneratorTestSuite';
 import NumericGeneratorTestSuite from '../../../resources/suites/generator/numeric/base/NumericGeneratorTestSuite';
 
-import Genetics from '../../../../index';
-const { IntegerGenerator } = Genetics.generator;
+import { IntegerGenerator } from '../../../../index';
 
 const generationTimes = 100;
 

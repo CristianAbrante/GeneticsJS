@@ -4,14 +4,8 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import * as generator from './lib/generator';
-import * as individual from './lib/individual';
-import * as mutation from './lib/mutation';
-import * as reader from './lib/reader';
-
-export default {
-  generator: generator.default,
-  individual: individual.default,
-  mutation: mutation.default,
-  reader: reader.default,
-};
+export * from './lib/crossover';
+export * from './lib/generator';
+export * from './lib/individual';
+export * from './lib/mutation';
+export * from './lib/reader';

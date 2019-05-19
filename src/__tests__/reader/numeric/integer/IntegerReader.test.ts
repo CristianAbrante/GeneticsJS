@@ -7,8 +7,7 @@
 import IntegerReaderData from '../../../resources/mocks/reader/data/IntegerReaderData';
 import readerTestSuite from '../../../resources/suites/reader/ReaderTestSuite';
 
-import Genetics from '../../../../index';
-const { IntegerReader } = Genetics.reader;
+import { IntegerReader } from '../../../../index';
 
 const reader = new IntegerReader();
 readerTestSuite(reader, IntegerReaderData);

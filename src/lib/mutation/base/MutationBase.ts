@@ -5,9 +5,9 @@
  */
 
 import { MutableIndividual } from '../../individual/base';
-import Mutation, { MutationParams } from './Mutation';
+import Mutation, { MutationParams as MutationBaseParams } from './Mutation';
 
-abstract class MutationBase<I extends MutableIndividual<T>, T, Params extends MutationParams>
+abstract class MutationBase<I extends MutableIndividual<T>, T, Params extends MutationBaseParams>
   implements Mutation<I, T, Params> {
   public mutateWith(individual: I, params: Params): void {
     individual.forEach((gene, index) => {
@@ -20,4 +20,5 @@ abstract class MutationBase<I extends MutableIndividual<T>, T, Params extends Mu
   protected abstract mutateGene(individual: I, index: number, params: Params): void;
 }
 
+export { MutationBaseParams };
 export default MutationBase;

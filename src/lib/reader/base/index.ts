@@ -5,5 +5,4 @@
  */
 
 export { default as BaseIndividualReader } from './BaseIndividualReader';
-export { default as IndividualReader } from './IndividualReader';
-export { IndividualToken } from './IndividualReader';
+export { default as IndividualReader, IndividualToken } from './IndividualReader';

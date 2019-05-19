@@ -5,9 +5,9 @@
  */
 
 import { BaseIndividual } from '../../individual/base';
-import Crossover, { CrossoverParams } from './Crossover';
+import Crossover, { CrossoverParams as BaseCrossoverParams } from './Crossover';
 
-abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends CrossoverParams<I, T>>
+abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends BaseCrossoverParams<I, T>>
   implements Crossover<I, T, Params> {
   public abstract cross(firstParent: I, secondParent: I, ...args: any[]): I[];
 
@@ -31,7 +31,7 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
   ): { first: T; second: T };
 
   protected parentsAreValid(firstParent: I, secondParent: I): boolean {
-    return firstParent.length() === secondParent.length();
+    return firstParent.length() === secondParent.length() && firstParent.length() > 1;
   }
 
   protected checkParents(firstParent: I, secondParent: I) {
@@ -41,4 +41,5 @@ abstract class BaseCrossover<I extends BaseIndividual<T>, T, Params extends Cros
   }
 }
 
+export { BaseCrossoverParams };
 export default BaseCrossover;

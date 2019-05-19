@@ -5,12 +5,13 @@
  */
 
 import { BinaryIndividual } from '../../individual/binary';
-import { UniformMutation, UniformMutationParams } from './../base';
+import { UniformMutation, UniformMutationParams as BitwiseMutationParams } from './../base';
 
 class BitwiseMutation extends UniformMutation<BinaryIndividual, boolean> {
-  protected mutateGeneUniformly(individual: BinaryIndividual, index: number, params: UniformMutationParams): void {
+  protected mutateGeneUniformly(individual: BinaryIndividual, index: number, params: BitwiseMutationParams): void {
     individual.flip(index);
   }
 }
 
+export { BitwiseMutationParams };
 export default BitwiseMutation;

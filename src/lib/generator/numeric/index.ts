@@ -4,14 +4,6 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import * as Base from './base';
-import * as Floating from './floating';
-import * as Integer from './integer';
-
-const numericGenerators = {
-  ...Base,
-  ...Floating,
-  ...Integer,
-};
-
-export default numericGenerators;
+export * from './base';
+export * from './floating';
+export * from './integer';

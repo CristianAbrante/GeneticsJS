@@ -8,7 +8,7 @@ import { Generator } from '../../generator/utils';
 import { BaseIndividual } from '../../individual/base';
 import { NumericRange } from '../../individual/numeric/base';
 import BaseCrossover from './BaseCrossover';
-import Crossover, { CrossoverParams, IndividualConstructor } from './Crossover';
+import { CrossoverParams, IndividualConstructor } from './Crossover';
 
 export interface NPointsCrossoverParams<I extends BaseIndividual<T>, T> extends CrossoverParams<I, T> {
   numberOfCrossoverPoints: number;
@@ -74,6 +74,7 @@ class NPointsCrossover<I extends BaseIndividual<T>, T> extends BaseCrossover<I, 
   }
 
   private generateCrossoverPoints(params: NPointsCrossoverParams<I, T>) {
+    this.crossoverPoints = [];
     while (this.crossoverPoints.length !== params.numberOfCrossoverPoints) {
       const point = Generator.generateInteger(this.crossoverPointsRange, params.engine);
       if (!this.crossoverPoints.includes(point)) {

@@ -7,15 +7,15 @@
 import { Generator } from '../../../generator/utils';
 import { NumericRange } from '../../../individual/numeric/base';
 import { FloatingIndividual } from '../../../individual/numeric/floating';
-import BaseCrossover from '../../base/BaseCrossover';
-import { CrossoverParams, IndividualConstructor } from '../../base/Crossover';
+import { BaseCrossover, CrossoverParams } from '../../base';
 
 export interface BaseFloatingCrossoverParams extends CrossoverParams<FloatingIndividual, number> {
   alpha: number;
 }
 
 abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, number, BaseFloatingCrossoverParams> {
-  private recombinationPoint: number = 0;
+  protected recombinationPoint: number = 0;
+
   public cross(
     firstParent: FloatingIndividual,
     secondParent: FloatingIndividual,
@@ -45,8 +45,8 @@ abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, n
     const firstValue = firstParent.get(index);
     const secondValue = secondParent.get(index);
     return {
-      first: recombinationCondition ? firstValue : this.getRecombinationValue(firstValue, secondValue, params),
-      second: recombinationCondition ? secondValue : this.getRecombinationValue(secondValue, firstValue, params),
+      first: recombinationCondition ? this.getRecombinationValue(firstValue, secondValue, params) : firstValue,
+      second: recombinationCondition ? this.getRecombinationValue(secondValue, firstValue, params) : secondValue,
     };
   }
 
@@ -71,3 +71,5 @@ abstract class BaseFloatingCrossover extends BaseCrossover<FloatingIndividual, n
     this.recombinationPoint = Generator.generateInteger(new NumericRange(0, parentsLength - 1), params.engine);
   }
 }
+
+export default BaseFloatingCrossover;

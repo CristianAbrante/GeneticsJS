@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  */
 
-import Genetics from '../../../../index';
-const { IntegerIndividual } = Genetics.individual;
+import { IntegerIndividual } from '../../../../index';
 
 // test suites import
 import BaseIndividualTestSuite from '../../../resources/suites/individual/base/BaseIndividualTestSuite';
