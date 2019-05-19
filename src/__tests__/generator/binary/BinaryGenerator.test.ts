@@ -12,7 +12,7 @@ import { BinaryGenerator } from '../../../index';
 
 BinaryGeneratorMock.forEach(testParams => {
   describe(`Tests with params: ${testParams.length} - ${testParams.chance}`, () => {
-    const generator    = new BinaryGenerator();
+    const generator = new BinaryGenerator();
     const ind = generator.generateWith(testParams);
     BaseGeneratorSuite(generator, ind, testParams);
     BinaryGeneratorSuite(generator, ind, testParams);

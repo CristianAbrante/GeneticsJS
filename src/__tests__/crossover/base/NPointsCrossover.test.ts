@@ -24,6 +24,7 @@ const nPointsTestSuite = <I extends BaseIndividual<T>, T>(
       test(`Individuals => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
         const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
         mockTest.crossoverPoints.forEach(point => {
+          // @ts-ignore
           mockedGenerator.generateInteger.mockReturnValueOnce(point);
         });
         const result = cross.cross(

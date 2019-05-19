@@ -24,10 +24,12 @@ const uniformCrossoverTestSuite = <I extends BaseIndividual<T>, T>(
     mock.forEach(mockTest => {
       test(`Individuals => ${mockTest.firstParent} x ${mockTest.secondParent}`, () => {
         const mockedGenerator = Generator as jest.Mocked<typeof Generator>;
+        // @ts-ignore
         mockedGenerator.probabilityIsValid.mockReturnValue(true);
-        mockTest.generatedValues.forEach(mockedProbability =>
-          mockedGenerator.generateProbability.mockReturnValueOnce(mockedProbability),
-        );
+        mockTest.generatedValues.forEach(mockedProbability => {
+          // @ts-ignore
+          mockedGenerator.generateProbability.mockReturnValueOnce(mockedProbability);
+        });
         const result = cross.cross(
           mockTest.firstParent,
           mockTest.secondParent,
