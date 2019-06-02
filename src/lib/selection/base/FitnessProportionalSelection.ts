@@ -5,39 +5,37 @@
  */
 
 import BaseIndividual from '../../individual/base/BaseIndividual';
-import RouletteBasedSelection from '../roulette-based/RouletteBasedSelection';
-import BaseSelection, { BaseSelectionIndividualData, BaseSelectionParams } from './BaseSelection';
+import Population, { PopulationItem } from '../../population/Population';
+import SelectionImplementation from '../implementation/SelectionImplementation';
+import BaseSelection, { BaseSelectionParams } from './BaseSelection';
 
-interface FitnessProportionalSelectionIndividualData<I extends BaseIndividual<T>, T>
-  extends BaseSelectionIndividualData<I, T> {
-  fitness: number;
-}
-
-interface FitnessProportionalSelectionParams<I extends BaseIndividual<T>, T>
-  extends BaseSelectionParams<I, T, FitnessProportionalSelectionIndividualData<I, T>> {
-  fitnessSum: number;
-  subSelection: RouletteBasedSelection<I, T>;
+interface FitnessProportionalSelectionParams<I extends BaseIndividual<T>, T> extends BaseSelectionParams {
+  subSelection: SelectionImplementation<I, T>;
 }
 
 class FitnessProportionalSelection<I extends BaseIndividual<T>, T> extends BaseSelection<I, T> {
-  public selectWith(params: FitnessProportionalSelectionParams<I, T>): I[] {
-    const cumulativeProbability: number[] = [];
-    params.individualsData.forEach((data, index) => {
-      const fitness = params.individualsData[index].fitness / params.fitnessSum;
-      if (index === 0) {
-        cumulativeProbability.push(fitness);
-      } else {
-        cumulativeProbability.push(cumulativeProbability[index - 1] + fitness);
-      }
-    });
-    return params.subSelection.selectWith({
-      individualsData: params.individualsData.map((data, index) => ({
-        cumulativeProbability: cumulativeProbability[index],
-        individual: data.individual,
-      })),
-      ...params,
-    });
+  private cumulativeProbability: number[] = [];
+
+  public selectWith(population: Population<I, T>, params: FitnessProportionalSelectionParams<I, T>): I[] {
+    this.checkParams(population, params);
+    this.cumulativeProbability = [];
+    for (let i = 0; i < population.getPopulationSize(); i++) {
+      const { fitness } = population.getPopulationItem(i);
+      const normalizedFitness = fitness / population.populationStatistics.fitnessSum;
+      const cumulativeProb = i === 0 ? normalizedFitness : this.cumulativeProbability[i - 1] + normalizedFitness;
+      this.cumulativeProbability.push(cumulativeProb);
+    }
+    return params.subSelection.select(
+      population,
+      { engine: params.engine, selectionCount: params.selectionCount },
+      this.getCumulativeProbability,
+    );
   }
+
+  private getCumulativeProbability = (item: PopulationItem<I, T>, index: number) => {
+    return this.cumulativeProbability[index];
+  };
 }
 
+export { FitnessProportionalSelectionParams };
 export default FitnessProportionalSelection;

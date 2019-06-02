@@ -7,22 +7,20 @@
 import { Generator } from '../../generator/utils';
 import BaseIndividual from '../../individual/base/BaseIndividual';
 import { NumericRange } from '../../individual/numeric/base';
-import BaseSelection, {
-  BaseSelectionIndividualData as RandomSelectionIndividualData,
-  BaseSelectionParams as RandomSelectionParams,
-} from '../base/BaseSelection';
+import Population from '../../population/Population';
+import BaseSelection, { BaseSelectionParams as RandomSelectionParams } from './BaseSelection';
 
 class RandomSelection<I extends BaseIndividual<T>, T> extends BaseSelection<I, T> {
-  public selectWith(data: Array<RandomSelectionIndividualData<I, T>>, params: RandomSelectionParams): I[] {
-    this.checkParams(data, params);
+  public selectWith(population: Population<I, T>, params: RandomSelectionParams): I[] {
+    this.checkParams(population, params);
     const mattingPool: I[] = [];
     while (mattingPool.length <= params.selectionCount) {
-      const generatedIndex = Generator.generateInteger(new NumericRange(0, data.length));
-      mattingPool.push(data[generatedIndex].individual);
+      const generatedIndex = Generator.generateInteger(new NumericRange(0, population.getPopulationSize()));
+      mattingPool.push(population.getPopulationItem(generatedIndex).individual);
     }
     return mattingPool;
   }
 }
 
-export { RandomSelectionIndividualData, RandomSelectionParams };
+export { RandomSelectionParams };
 export default RandomSelection;

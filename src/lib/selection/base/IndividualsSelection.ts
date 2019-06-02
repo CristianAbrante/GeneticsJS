@@ -6,24 +6,15 @@
 
 import { Engine } from 'random-js';
 import BaseIndividual from '../../individual/base/BaseIndividual';
+import Population from '../../population/Population';
 
-export interface IndividualData<I extends BaseIndividual<T>, T> {
-  individual: I;
-}
-
-export interface IndividualsSelectionParams<I extends BaseIndividual<T>, T, Data extends IndividualData<I, T>> {
-  individualsData: Data[];
+export interface IndividualsSelectionParams {
   selectionCount: number;
   engine: Engine;
 }
 
-interface IndividualsSelection<
-  I extends BaseIndividual<T>,
-  T,
-  Data extends IndividualData<I, T>,
-  Params extends IndividualsSelectionParams<I, T, Data>
-> {
-  selectWith(params: Params): I[];
+interface IndividualsSelection<I extends BaseIndividual<T>, T, Params extends IndividualsSelectionParams> {
+  selectWith(population: Population<I, T>, params: Params): I[];
 }
 
 export default IndividualsSelection;
