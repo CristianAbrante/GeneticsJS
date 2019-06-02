@@ -13,13 +13,12 @@ import BaseSelection, {
 } from '../base/BaseSelection';
 
 class RandomSelection<I extends BaseIndividual<T>, T> extends BaseSelection<I, T> {
-  public selectWith(params: RandomSelectionParams<I, T, RandomSelectionIndividualData<I, T>>): I[] {
-    this.checkParams(params);
+  public selectWith(data: Array<RandomSelectionIndividualData<I, T>>, params: RandomSelectionParams): I[] {
+    this.checkParams(data, params);
     const mattingPool: I[] = [];
     while (mattingPool.length <= params.selectionCount) {
-      const { individualsData } = params;
-      const generatedIndex = Generator.generateInteger(new NumericRange(0, individualsData.length));
-      mattingPool.push(individualsData[generatedIndex].individual);
+      const generatedIndex = Generator.generateInteger(new NumericRange(0, data.length));
+      mattingPool.push(data[generatedIndex].individual);
     }
     return mattingPool;
   }
