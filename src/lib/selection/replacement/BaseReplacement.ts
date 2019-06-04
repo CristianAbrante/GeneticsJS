@@ -7,7 +7,6 @@
 import BaseIndividual from '../../individual/base/BaseIndividual';
 import Population, { PopulationItem } from '../../population/Population';
 import PopulationReplacement, { PopulationReplacementParams } from './PopulationReplacement';
-const util = require('util');
 
 abstract class BaseReplacement<I extends BaseIndividual<T>, T> implements PopulationReplacement<I, T> {
   public replace(
