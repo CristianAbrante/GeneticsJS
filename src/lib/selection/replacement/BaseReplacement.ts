@@ -15,34 +15,14 @@ abstract class BaseReplacement<I extends BaseIndividual<T>, T> implements Popula
     params: PopulationReplacementParams,
   ): Population<I, T> {
     const returnPopulation = new Population<I, T>();
-
-    const oldSortedItems = oldPopulation.getPopulationItems().sort(this.sortMethod);
-    const newSortedItems = newPopulation.getPopulationItems().sort(this.sortMethod);
-    let firstIndex = 0;
-    let secondIndex = 0;
-
-    while (
-      firstIndex < oldSortedItems.length &&
-      secondIndex < newSortedItems.length &&
-      returnPopulation.getPopulationSize() !== params.selectionCount
-    ) {
-      if (oldSortedItems[firstIndex] < newSortedItems[secondIndex]) {
-        this.pushIndividual(returnPopulation, oldSortedItems[firstIndex]);
-        firstIndex += 1;
-      } else {
-        this.pushIndividual(returnPopulation, newSortedItems[secondIndex]);
-        secondIndex += 1;
-      }
-    }
-
-    while (firstIndex < oldSortedItems.length && returnPopulation.getPopulationSize() !== params.selectionCount) {
-      this.pushIndividual(returnPopulation, oldSortedItems[firstIndex]);
-      firstIndex += 1;
-    }
-    while (secondIndex < newSortedItems.length && returnPopulation.getPopulationSize() !== params.selectionCount) {
-      this.pushIndividual(returnPopulation, newSortedItems[secondIndex]);
-      secondIndex += 1;
-    }
+    oldPopulation
+      .getPopulationItems()
+      .concat(newPopulation.getPopulationItems())
+      .sort(this.sortMethod)
+      .slice(0, params.selectionCount)
+      .forEach(item => {
+        returnPopulation.pushIndividual(item.individual, item.fitness, item.age + 1);
+      });
     return returnPopulation;
   }
 
