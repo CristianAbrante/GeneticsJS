@@ -16,7 +16,7 @@ class MaxGenerations<I extends BaseIndividual<T>, T> implements TerminationCondi
   }
 
   public isSatisfied(population: Population<I, T>, generations: number): boolean {
-    return generations < this.maxGenerations;
+    return generations >= this.maxGenerations;
   }
 }
 
